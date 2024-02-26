@@ -1,44 +1,70 @@
-# Sign3SDK-Integration-Guide
+# Sign3 SDK Integration Guide
 
+This guide provides step-by-step instructions on how to integrate the Sign3 SDK into your Android application to enhance device security and intelligence capabilities.
 
-Integration Documentation of Sign3 SDK
+<br>
 
-Integrate the Sign3 SDK
+## Adding Sign3SDK to Your Project
 
-Step 1: Add Sign3SDK to the Dependency block of your app/build.gradle file.
-dependencies {
-    implementation ‘com.sign3.intelligence:intelligence:<latest_version>’
-}
-Step 2: Sync project with gradle files
+### Using Gradle Dependency
 
-Manual Implementation
-Step 1: Add aar file in your libs folder
-Step 2: In your app build.gradle file simply add the SDK
-implementation(files("libs/sign3intelligence-release.aar"))
-Step 3: Sync project with gradle files
+1. **Add Sign3SDK to the Dependency Block**
+   - Open your app's `build.gradle` file and add the following line to the dependencies block:
 
+     ```groovy
+     dependencies {
+         implementation 'com.sign3.intelligence:intelligence:<latest_version>'
+     }
+     ```
+2. **After adding the dependency, sync your project with Gradle files to ensure the library is properly integrated.**
 
-Initialize the SDK
+### Manual Implementation
 
-The SDK initialization should be configured at onCreate() in your Application class to ensure successful generation and processing of device fingerprints. You need to set the SIGN3CLIENT_ID, SIGN3CLIENT_SECRET & ENVIRONMENT(PROD, DEV, STAGE) to initialize the SDK. 
+1. **Download & add the `sign3intelligence-release.aar` file to your `libs` folder.** 
+2. **Include the SDK in Your Build**
+   - In your app's `build.gradle` file, add the following line:
 
-For Java 
+     ```groovy
+     implementation(files("libs/sign3intelligence-release.aar"))
+     ```
+3. **Sync your project with Gradle files to complete the manual implementation.**
+
+<br>
+
+## Initializing the SDK
+
+To ensure successful generation and processing of device fingerprints, initialize the SDK in the `onCreate()` method of your Application class.
+
+### For Java
+
+```java
+import com.sign3.intelligence.Options
+import com.sign3.intelligence.Sign3Intelligence
+```
+
+```java
 Options options = new Options.Builder()
            .setSign3ClientId("SIGN3_CLIENT_ID")
            .setSign3ClientSecret("SIGN3_CLIENT_SECRET")
            .setEnvironment(Options.ENV_PROD)
            .build();
 
-
 Sign3Intelligence.getInstance(this).initAsync(options, new Callback<Boolean>() {
        @Override
        public void onResult(Boolean result) {
-           // to check if the SDK is initialized correctly or not
            Log.i("AppInstance", "Sign3Intelligence init : " + result);
        }
 });
+```
 
-For Kotlin
+### For Kotlin
+
+```kotlin
+import com.sign3.intelligence.Options
+import com.sign3.intelligence.Sign3Intelligence
+```
+
+```kotlin
 val options = Options.Builder()
    .setSign3ClientId("SIGN3_CLIENT_ID")
    .setSign3ClientSecret("SIGN3_CLIENT_SECRET")
@@ -50,12 +76,23 @@ Sign3Intelligence.getInstance(this).initAsync(options) {
    // to check if the SDK is initialized correctly or not
    Log.i("AppInstance", "Sign3Intelligence init : $it")
 }
+```
 
-Get Device Result
+<br>
+
+## Get Device Result
 
 Our SDK will capture an initial device fingerprint upon SDK initialization and return an additional set of device intelligence ONLY if the device fingerprint changes along one session. This ensures a truly optimised end to end protection of your ecosystem.
 
-For Java
+### For Java
+
+```java
+import com.sign3.intelligence.Sign3Intelligence
+import com.sign3.intelligence.IntelligenceListener
+import com.sign3.intelligence.model.IntelligenceError
+import com.sign3.intelligence.model.IntelligenceResponse
+```
+```java
 Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
        @Override
        public void onSuccess(IntelligenceResponse response) {
@@ -68,9 +105,17 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
            // Something went wrong, handle the error message
        }
 });
+```
 
+### For Kotlin
 
-For Kotlin
+```kotlin
+import com.sign3.intelligence.Sign3Intelligence
+import com.sign3.intelligence.IntelligenceListener
+import com.sign3.intelligence.model.IntelligenceError
+import com.sign3.intelligence.model.IntelligenceResponse
+```
+```kotlin
 Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListener {
    override fun onSuccess(response: IntelligenceResponse) {
         // Do something with the response
@@ -81,25 +126,15 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
         // Something went wrong, handle the error message
    }
 })
-
+```
 
 The SDK provides a method getIntelligence that asynchronously fetches this data. Upon successful data retrieval, the method triggers the onSuccess callback, where the response containing the device intelligence information is processed. In the event of an error during this process, the onError callback is invoked.
 
+<br>
 
+## Sample Device Result Response
 
-
-
-
-
-
-
-
-
-
-
-
-Sample Device Result Response
-
+```response
 {
        "requestId": "904a9a7d-f4f2-46ae-97df-24f23acb0528",
        "newDevice": true,
@@ -121,25 +156,39 @@ Sample Device Result Response
        "ipRiskScore": 0.0,
        "ipNetworkType": "Mobile"
 }
+```
+<br>
 
 The device result JSONObject has following keys:
 
-requestId: A unique identifier for the request, used to track the intelligence request and its response.
-newDevice: Indicates whether the device is being seen for the first time (true) or not (false).
-deviceId: A unique identifier for the device, typically used to track it across sessions or requests.
-vpn: A boolean flag indicating whether the device is connected via a Virtual Private Network (true) or not (false).
-proxy: Specifies if the device's internet connection is routed through a proxy server (true) or not (false).
-emulator: Determines if the device is an emulator (true) or a physical device (false).
-remoteAccess: Indicates whether the device is being accessed remotely (true) or not (false).
-cloned: A boolean flag showing if the device is a clone (true) or original (false).
-geoSpoofed: Specifies if the device's geographic location is being spoofed (true) or is genuine (false).
-rooted: Indicates whether the device has root access (true) or not (false).
-riskScore: A qualitative assessment of the device's security risk ("high", "medium", "low"), reflecting its overall trustworthiness.
-ip: The IP address currently assigned to the device.
-ipLocationCity: The city derived from the device's IP address location.
-ipLocationRegion: The region or state derived from the device's IP address location.
-ipLocationCountry: The country code derived from the device's IP address location.
-ipLocationLatitude: The latitude location based on its IP address.
-ipLocationLongitude: The longitude location based on its IP address.
-ipRiskScore: A numeric score representing the risk associated with the device's IP address, with higher scores indicating greater risk.
-ipNetworkType: The type of network the device is connected to (e.g., "Mobile"), providing insight into the nature of the internet connection.
+
+1. **requestId**: A unique identifier for the request, used to track the intelligence request and its response.
+2. **newDevice**: Indicates whether the device is being seen for the first time (true) or not (false).
+3. **deviceId**: A unique identifier for the device, typically used to track it across sessions or requests.
+4. **vpn**: A boolean flag indicating whether the device is connected via a Virtual Private Network (true) or not (false).
+5. **proxy**: Specifies if the device's internet connection is routed through a proxy server (true) or not (false).
+6. **emulator**: Determines if the device is an emulator (true) or a physical device (false).
+7. **remoteAccess**: Indicates whether the device is being accessed remotely (true) or not (false).
+8. **cloned**: A boolean flag showing if the device is a clone (true) or original (false).
+9. **geoSpoofed**: Specifies if the device's geographic location is being spoofed (true) or is genuine (false).
+10. **rooted**: Indicates whether the device has root access (true) or not (false).
+11. **riskScore**: A qualitative assessment of the device's security risk ("high", "medium", "low"), reflecting its overall trustworthiness.
+12. **ip**: The IP address currently assigned to the device.
+13. **ipLocationCity**: The city derived from the device's IP address location.
+14. **ipLocationRegion**: The region or state derived from the device's IP address location.
+15. **ipLocationCountry**: The country code derived from the device's IP address location.
+16. **ipLocationLatitude**: The latitude location based on its IP address.
+17. **ipLocationLongitude**: The longitude location based on its IP address.
+18. **ipRiskScore**: A numeric score representing the risk associated with the device's IP address, with higher scores indicating greater risk.
+19. **ipNetworkType**: The type of network the device is connected to (e.g., "Mobile"), providing insight into the nature of the internet connection.
+
+
+<br>
+
+## Changelog
+### 2.0.7
+- Bug fixing  
+
+### 2.0.8
+- Bug fixing
+
