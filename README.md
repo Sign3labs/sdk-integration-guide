@@ -15,6 +15,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
          implementation 'com.sign3.intelligence:intelligence:<latest_version>'
      }
      ```
+   - For the most recent latest version, see the [Changelog](https://github.com/ashishgupta6/Sign3SDK-Integration-Guide?tab=readme-ov-file#changelog)
 2. **After adding the dependency, sync your project with Gradle files to ensure the library is properly integrated.**
 
 ### Manual Implementation
