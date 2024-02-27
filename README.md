@@ -1,7 +1,6 @@
 # Sign3 SDK Integration Guide
 
-This guide provides step-by-step instructions on how to integrate the Sign3 SDK into your Android application to enhance device security and intelligence capabilities.
-
+The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess device security, detecting potential risks such as rooted devices, VPN connections, or remote access and much more. Providing insights into the device's safety, it enhances security measures against fraudulent activities and ensures a robust protection system.
 <br>
 
 ## Adding Sign3SDK to Your Project
@@ -136,26 +135,43 @@ The SDK provides a method getIntelligence that asynchronously fetches this data.
 
 ```response
 {
-       "requestId": "904a9a7d-f4f2-46ae-97df-24f23acb0528",
-       "newDevice": true,
-       "deviceId": "e25dae67-8d6d-41d8-b299-bb3985eaa095",
-       "vpn": false,
-       "proxy": false,
-       "emulator": true,
-       "remoteAccess": false,
-       "cloned": true,
-       "geoSpoofed": false,
-       "rooted": false,
-       "riskScore": "high",
-       "ip": "152.59.69.117",
-       "ipLocationCity": "Delhi",
-       "ipLocationRegion": "National Capital Territory of Delhi",
-       "ipLocationCountry": "IN",
-       "ipLocationLatitude": 28.6541996,
-       "ipLocationLongitude": 77.23729706,
-       "ipRiskScore": 0.0,
-       "ipNetworkType": "Mobile"
+  "requestId": "9ca5fa19-cc8c-4d67-ac43-ae301e50478a",
+  "newDevice": false,
+  "deviceId": "6c805eea-cb6a-4a1f-8896-eb7b4804556d",
+  "vpn": false,
+  "proxy": false,
+  "emulator": true,
+  "remoteAccess": false,
+  "cloned": false,
+  "geoSpoofed": false,
+  "rooted": false,
+  "riskScore": "high",
+  "ip": "183.83.153.87",
+  "ipLocationCity": "Chennai",
+  "ipLocationRegion": "Tamil Nadu",
+  "ipLocationCountry": "IN",
+  "ipLocationLatitude": 12.89960003,
+  "ipLocationLongitude": 80.22090149,
+  "ipRiskScore": 0.0,
+  "ipNetworkType": "Residential",
+  "hooking": true,
+  "factoryReset": false,
+  "appTampering": false,
+  "gpsLocation": {
+    "latitude": 37.4222755,
+    "longitude": -122.0842218,
+    "countryName": "United States",
+    "countryCode": "US",
+    "adminArea": "California",
+    "subAdminArea": "Santa Clara County",
+    "featureName": "1650",
+    "postalCode": "94043",
+    "locality": "Mountain View",
+    "subLocality": null,
+    "address": "1650 Amphitheatre Pkwy, Mountain View, CA 94043, USA"
+  }
 }
+
 ```
 <br>
 
@@ -181,6 +197,11 @@ The device result JSONObject has following keys:
 17. **ipLocationLongitude**: The longitude location based on its IP address.
 18. **ipRiskScore**: A numeric score representing the risk associated with the device's IP address, with higher scores indicating greater risk.
 19. **ipNetworkType**: The type of network the device is connected to (e.g., "Mobile"), providing insight into the nature of the internet connection.
+20. **hooking**: Indicates if the device is using any form of hooking techniques, often used for intercepting function calls or messages.
+21. **factoryReset**: Specifies if the device has been recently factory reset.
+22. **gpsLocation**: A detailed object containing geographic location information obtained via GPS, including latitude, longitude, country name and code, administrative areas, postal code, 
+        locality, and specific address.
+23. **appTampering**: Indicates whether there's evidence of tampering with the application, such as modifying its code or behavior.
 
 
 <br>
