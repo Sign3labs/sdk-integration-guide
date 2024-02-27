@@ -185,10 +185,42 @@ The device result JSONObject has following keys:
 
 <br>
 
-## Changelog
-### 2.0.7
-- Bug fixing  
+# Changelog
 
 ### 2.0.8
-- Bug fixing
+- Add new Detector features
+- Add Some Device Signals
+- Modified existing Detector codes
+- Upgrade all dependencies with latest version
+- Upgrade versions for newly device (Target API level : 34 Minimum API level : 21)
+- Modified some deprecated methods
+- Bug fixing and performance improvements
+
+
+### 2.0.7
+- Emulator detection improvements
+- Handle data_roaming exception in android 13 device
+- Bugfixes and compatibility improvements  
+
+### 2.0.6
+- Bugfixes and compatibility improvements 
+
+### 2.0.5
+- Bugfixes and stability improvements
+
+### 2.0.4
+- Bugfixes and stability improvements
+  
+### 2.0.3
+- Bugfixes and stability improvements 
+
+### 2.0.2
+- Bugfixes and stability improvements
+
+### 2.0.1
+- Bugfixes and performance improvements
+
+### 2.0.0
+- First stable build
+
 
