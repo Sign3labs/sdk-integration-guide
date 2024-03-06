@@ -125,7 +125,7 @@ val updateOptions = UpdateOptions.Builder()
         .setSessionId("uuid") // Set session id to reference the result in future
         .build()
 
-    Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
+Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
 ```
 <br>
 
