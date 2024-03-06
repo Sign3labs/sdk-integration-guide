@@ -16,12 +16,12 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
           mavenCentral()
           maven { url 'https://jitpack.io' }
           maven {
-              url
-              "https://sign3.jfrog.io/artifactory/intelligence-generic-local/"
+              url "https://sign3.jfrog.io/artifactory/intelligence-generic-local/"
               credentials {
                   username = "provided in credential doc"
                   password = "provided in credential doc"
-              } }
+              }
+          }
       }
       ```
 
