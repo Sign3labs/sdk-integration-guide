@@ -5,14 +5,38 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 
 ## Adding Sign3SDK to Your Project
 
-### Using Gradle Dependency
+### Using Project Level Gradle Dependency
+
+1. **Add Sign3SDK to the Dependency Block**
+   - Open your project level `build.gradle` file and add the following line to the dependencies block. Please collect the **username** and **password** from Sign3
+
+     ```groovy
+      repositories {
+          google()
+          mavenCentral()
+          maven { url 'https://jitpack.io' }
+          maven {
+              url
+              "https://sign3.jfrog.io/artifactory/intelligence-generic-local/"
+              credentials {
+                  username = "provided in credential doc"
+                  password = "provided in credential doc"
+              } }
+      }
+      ```
+
+### Using App Level Gradle Dependency
 
 1. **Add Sign3SDK to the Dependency Block**
    - Open your app's `build.gradle` file and add the following line to the dependencies block:
 
      ```groovy
      dependencies {
+         // For non play store application
          implementation 'com.sign3.intelligence:intelligence:<latest_version>'
+
+         // For play store application
+         implementation 'com.sign3.intelligence:intelligence-playstore:<latest_version>'
      }
      ```
    - For the most recent latest version, see the [Changelog](https://github.com/ashishgupta6/Sign3SDK-Integration-Guide?tab=readme-ov-file#changelog)
@@ -38,11 +62,6 @@ To ensure successful generation and processing of device fingerprints, initializ
 ### For Java
 
 ```java
-import com.sign3.intelligence.Options
-import com.sign3.intelligence.Sign3Intelligence
-```
-
-```java
 Options options = new Options.Builder()
            .setSign3ClientId("SIGN3_CLIENT_ID")
            .setSign3ClientSecret("SIGN3_CLIENT_SECRET")
@@ -60,11 +79,6 @@ Sign3Intelligence.getInstance(this).initAsync(options, new Callback<Boolean>() {
 ### For Kotlin
 
 ```kotlin
-import com.sign3.intelligence.Options
-import com.sign3.intelligence.Sign3Intelligence
-```
-
-```kotlin
 val options = Options.Builder()
    .setSign3ClientId("SIGN3_CLIENT_ID")
    .setSign3ClientSecret("SIGN3_CLIENT_SECRET")
@@ -80,18 +94,47 @@ Sign3Intelligence.getInstance(this).initAsync(options) {
 
 <br>
 
+## Optional Parameters
+You can add optional parameters like userId anytime and update the instance of Sign3Intelligence.
+
+### For Java
+
+```java
+
+ UpdateOptions updateOptions = new UpdateOptions.Builder()
+        .setUserId("user-id") // set user id here, you can reference the result in future
+        .setPhoneNumber("1234567890") // you can add the customer phone number
+        .setPhoneInputType(PhoneInputType.PASTED) //See PhoneInputType class
+        .setOtpInputType(OtpInputType.AUTO_FILLED) //See OtpInputType class
+        .setUserEventType(UserEventType.LOGIN) //See UserEventType class
+        .setSessionId("uuid").build() // set session id to reference the result in future
+
+Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
+```
+
+### For Kotlin
+
+```kotlin
+
+val updateOptions = UpdateOptions.Builder()
+        .setUserId("user-id") // Set user id here, you can reference the result in future
+        .setPhoneNumber("1234567890") // You can add the customer phone number
+        .setPhoneInputType(PhoneInputType.PASTED) // See PhoneInputType class
+        .setOtpInputType(OtpInputType.AUTO_FILLED) // See OtpInputType class
+        .setUserEventType(UserEventType.LOGIN) // See UserEventType class
+        .setSessionId("uuid") // Set session id to reference the result in future
+        .build()
+
+    Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
+```
+<br>
+
 ## Get Device Result
 
 Our SDK will capture an initial device fingerprint upon SDK initialization and return an additional set of device intelligence ONLY if the device fingerprint changes along one session. This ensures a truly optimised end to end protection of your ecosystem.
 
 ### For Java
 
-```java
-import com.sign3.intelligence.Sign3Intelligence
-import com.sign3.intelligence.IntelligenceListener
-import com.sign3.intelligence.model.IntelligenceError
-import com.sign3.intelligence.model.IntelligenceResponse
-```
 ```java
 Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
        @Override
@@ -110,12 +153,6 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 ### For Kotlin
 
 ```kotlin
-import com.sign3.intelligence.Sign3Intelligence
-import com.sign3.intelligence.IntelligenceListener
-import com.sign3.intelligence.model.IntelligenceError
-import com.sign3.intelligence.model.IntelligenceResponse
-```
-```kotlin
 Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListener {
    override fun onSuccess(response: IntelligenceResponse) {
         // Do something with the response
@@ -133,6 +170,8 @@ The SDK provides a method getIntelligence that asynchronously fetches this data.
 <br>
 
 ## Sample Device Result Response
+
+### Successful Intelligence Response
 
 ```response
 {
@@ -174,6 +213,15 @@ The SDK provides a method getIntelligence that asynchronously fetches this data.
 }
 
 ```
+### Error Response
+
+```error
+{
+  "requestId": "7e12d131-2d90-4529-a5c7-35f457d86ae6",
+  "errorMessage": "Failed to retrieve response"
+}
+```
+
 <br>
 
 The device result JSONObject has following keys:
@@ -209,13 +257,17 @@ The device result JSONObject has following keys:
 
 # Changelog
 
-### 2.0.8
+### 2.0.9
 - Add new Detector features
 - Add Some Device Signals
 - Modified existing Detector codes
 - Upgrade all dependencies with latest version
 - Upgrade versions for newly device (Target API level : 34 Minimum API level : 21)
 - Modified some deprecated methods
+- Bug fixing and performance improvements
+
+### 2.0.8
+- Azure migration
 - Bug fixing and performance improvements
 
 
