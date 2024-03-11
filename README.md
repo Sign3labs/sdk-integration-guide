@@ -63,8 +63,8 @@ To ensure successful generation and processing of device fingerprints, initializ
 
 ```java
 Options options = new Options.Builder()
-           .setSign3ClientId("SIGN3_CLIENT_ID")
-           .setSign3ClientSecret("SIGN3_CLIENT_SECRET")
+           .setClientId("SIGN3_CLIENT_ID")
+           .setClientSecret("SIGN3_CLIENT_SECRET")
            .setEnvironment(Options.ENV_PROD)
            .build();
 
@@ -80,8 +80,8 @@ Sign3Intelligence.getInstance(this).initAsync(options, new Callback<Boolean>() {
 
 ```kotlin
 val options = Options.Builder()
-   .setSign3ClientId("SIGN3_CLIENT_ID")
-   .setSign3ClientSecret("SIGN3_CLIENT_SECRET")
+   .setClientId("SIGN3_CLIENT_ID")
+   .setClientSecret("SIGN3_CLIENT_SECRET")
    .setEnvironment(Options.ENV_PROD)
    .build()
 
