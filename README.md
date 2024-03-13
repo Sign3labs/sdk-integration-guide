@@ -55,6 +55,23 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 
 <br>
 
+## App Permission
+   1. Add the following permissions in the Manifest file.
+   2. Optional permissions are recommended to achieve higher accuracy
+
+```java
+<uses-permission android:name="android.permission.INTERNET" />
+<!-- optional -->
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+```
+
+<br>
+
 ## Initializing the SDK
 
 To ensure successful generation and processing of device fingerprints, initialize the SDK in the `onCreate()` method of your Application class.
