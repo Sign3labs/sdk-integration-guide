@@ -134,6 +134,26 @@ Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
 ```
 <br>
 
+## Get Session ID
+
+1. The Session ID is the unique identifier of a user's app session and serves as a reference point when retrieving the device result for that session.
+2. The Session ID follows the OS lifecycle management, in line with industry best practices. This means that a user's session remains active as long as the device maintains it, unless the user terminates the app or the device runs out of memory and has to kill the app.
+ 
+### For Java
+
+ ```java
+
+String sessionId = Sign3Intelligence.getInstance(this).getSessionId()
+```
+
+### For Kotlin
+
+ ```kotlin
+
+val sessionId = Sign3Intelligence.getInstance(this).getSessionId()
+```
+<br>
+
 ## Fetch Device Intelligence Result
 
 1. To fetch the device intelligence data refer to the following code snippet.
