@@ -42,17 +42,6 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
    - For the most recent latest version, see the [Changelog](https://github.com/ashishgupta6/Sign3SDK-Integration-Guide?tab=readme-ov-file#changelog)
 2. **After adding the dependency, sync your project with Gradle files to ensure the library is properly integrated.**
 
-### Manual Implementation
-
-1. **Download & add the `sign3intelligence-release.aar` file to your `libs` folder.** 
-2. **Include the SDK in Your Build**
-   - In your app's `build.gradle` file, add the following line:
-
-     ```groovy
-     implementation(files("libs/sign3intelligence-release.aar"))
-     ```
-3. **Sync your project with Gradle files to complete the manual implementation.**
-
 <br>
 
 ## App Permission
@@ -62,19 +51,18 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 ```java
 <uses-permission android:name="android.permission.INTERNET" />
 <!-- optional -->
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 ```
 
 <br>
 
 ## Initializing the SDK
 
-To ensure successful generation and processing of device fingerprints, initialize the SDK in the `onCreate()` method of your Application class.
+1. Initialize the SDK in the `onCreate()` method of your Application class. 
+2. Use the ClientID and Client Secret shared over email
+3. to enable a more in-depth root detection, you would need to add `enabledSign3Service` 
 
 ### For Java
 
@@ -83,6 +71,7 @@ Options options = new Options.Builder()
            .setClientId("SIGN3_CLIENT_ID")
            .setClientSecret("SIGN3_CLIENT_SECRET")
            .setEnvironment(Options.ENV_PROD)
+           .enabledSign3Service(true)
            .build();
 
 Sign3Intelligence.getInstance(this).initAsync(options, new Callback<Boolean>() {
@@ -100,6 +89,7 @@ val options = Options.Builder()
    .setClientId("SIGN3_CLIENT_ID")
    .setClientSecret("SIGN3_CLIENT_SECRET")
    .setEnvironment(Options.ENV_PROD)
+   .enabledSign3Service(true)
    .build()
 
 
@@ -124,7 +114,6 @@ You can add optional parameters like userId anytime and update the instance of S
         .setPhoneInputType(PhoneInputType.PASTED) //See PhoneInputType class
         .setOtpInputType(OtpInputType.AUTO_FILLED) //See OtpInputType class
         .setUserEventType(UserEventType.LOGIN) //See UserEventType class
-        .setSessionId("uuid").build() // set session id to reference the result in future
 
 Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
 ```
@@ -139,16 +128,16 @@ val updateOptions = UpdateOptions.Builder()
         .setPhoneInputType(PhoneInputType.PASTED) // See PhoneInputType class
         .setOtpInputType(OtpInputType.AUTO_FILLED) // See OtpInputType class
         .setUserEventType(UserEventType.LOGIN) // See UserEventType class
-        .setSessionId("uuid") // Set session id to reference the result in future
         .build()
 
 Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
 ```
 <br>
 
-## Get Device Result
+## Fetch Device Intelligence Result
 
-Our SDK will capture an initial device fingerprint upon SDK initialization and return an additional set of device intelligence ONLY if the device fingerprint changes along one session. This ensures a truly optimised end to end protection of your ecosystem.
+1. To fetch the device intelligence data refer to the following code snippet.
+2. IntelligenceResponse and IntelligenceError models are exposed by the SDK.
 
 ### For Java
 
@@ -182,7 +171,44 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 })
 ```
 
-The SDK provides a method getIntelligence that asynchronously fetches this data. Upon successful data retrieval, the method triggers the onSuccess callback, where the response containing the device intelligence information is processed. In the event of an error during this process, the onError callback is invoked.
+<br>
+
+## Fetch Continuous Integration Result
+
+1. Device results can be retrieved at specific user checkpoints or activities, such as account registration, login, or checkout. This ensures there is adequate time to generate a device fingerprint.
+2. To retrive the device result via Continuous integration
+
+### For Java
+
+```java
+Sign3Intelligence.getInstance(this).getContinuousIntegration(new IntelligenceListener() {
+       @Override
+       public void onSuccess(IntelligenceResponse response) {
+           // Do something with the response
+       }
+
+
+       @Override
+       public void onError(IntelligenceError error) {
+           // Something went wrong, handle the error message
+       }
+});
+```
+
+### For Kotlin
+
+```kotlin
+Sign3Intelligence.getInstance(this).getContinuousIntegration(object : IntelligenceListener {
+   override fun onSuccess(response: IntelligenceResponse) {
+        // Do something with the response
+   }
+
+
+   override fun onError(error: IntelligenceError) {
+        // Something went wrong, handle the error message
+   }
+})
+```
 
 <br>
 
@@ -203,14 +229,6 @@ The SDK provides a method getIntelligence that asynchronously fetches this data.
   "geoSpoofed": false,
   "rooted": false,
   "riskScore": "high",
-  "ip": "183.83.153.87",
-  "ipLocationCity": "Chennai",
-  "ipLocationRegion": "Tamil Nadu",
-  "ipLocationCountry": "IN",
-  "ipLocationLatitude": 12.89960003,
-  "ipLocationLongitude": 80.22090149,
-  "ipRiskScore": 0.0,
-  "ipNetworkType": "Residential",
   "hooking": true,
   "factoryReset": false,
   "appTampering": false,
@@ -240,78 +258,5 @@ The SDK provides a method getIntelligence that asynchronously fetches this data.
 ```
 
 <br>
-
-The device result JSONObject has following keys:
-
-
-1. **requestId**: A unique identifier for the request, used to track the intelligence request and its response.
-2. **newDevice**: Indicates whether the device is being seen for the first time (true) or not (false).
-3. **deviceId**: A unique identifier for the device, typically used to track it across sessions or requests.
-4. **vpn**: A boolean flag indicating whether the device is connected via a Virtual Private Network (true) or not (false).
-5. **proxy**: Specifies if the device's internet connection is routed through a proxy server (true) or not (false).
-6. **emulator**: Determines if the device is an emulator (true) or a physical device (false).
-7. **remoteAccess**: Indicates whether the device is being accessed remotely (true) or not (false).
-8. **cloned**: A boolean flag showing if the device is a clone (true) or original (false).
-9. **geoSpoofed**: Specifies if the device's geographic location is being spoofed (true) or is genuine (false).
-10. **rooted**: Indicates whether the device has root access (true) or not (false).
-11. **riskScore**: A qualitative assessment of the device's security risk ("high", "medium", "low"), reflecting its overall trustworthiness.
-12. **ip**: The IP address currently assigned to the device.
-13. **ipLocationCity**: The city derived from the device's IP address location.
-14. **ipLocationRegion**: The region or state derived from the device's IP address location.
-15. **ipLocationCountry**: The country code derived from the device's IP address location.
-16. **ipLocationLatitude**: The latitude location based on its IP address.
-17. **ipLocationLongitude**: The longitude location based on its IP address.
-18. **ipRiskScore**: A numeric score representing the risk associated with the device's IP address, with higher scores indicating greater risk.
-19. **ipNetworkType**: The type of network the device is connected to (e.g., "Mobile"), providing insight into the nature of the internet connection.
-20. **hooking**: Indicates if the device is using any form of hooking techniques, often used for intercepting function calls or messages.
-21. **factoryReset**: Specifies if the device has been recently factory reset.
-22. **gpsLocation**: A detailed object containing geographic location information obtained via GPS, including latitude, longitude, country name and code, administrative areas, postal code, 
-        locality, and specific address.
-23. **appTampering**: Indicates whether there's evidence of tampering with the application, such as modifying its code or behavior.
-
-
-<br>
-
-# Changelog
-
-### 2.0.9
-- Add new Detector features
-- Add Some Device Signals
-- Modified existing Detector codes
-- Upgrade all dependencies with latest version
-- Upgrade versions for newly device (Target API level : 34 Minimum API level : 21)
-- Modified some deprecated methods
-- Bug fixing and performance improvements
-
-### 2.0.8
-- Azure migration
-- Bug fixing and performance improvements
-
-
-### 2.0.7
-- Emulator detection improvements
-- Handle data_roaming exception in android 13 device
-- Bugfixes and compatibility improvements  
-
-### 2.0.6
-- Bugfixes and compatibility improvements 
-
-### 2.0.5
-- Bugfixes and stability improvements
-
-### 2.0.4
-- Bugfixes and stability improvements
-  
-### 2.0.3
-- Bugfixes and stability improvements 
-
-### 2.0.2
-- Bugfixes and stability improvements
-
-### 2.0.1
-- Bugfixes and performance improvements
-
-### 2.0.0
-- First stable build
 
 
