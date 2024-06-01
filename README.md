@@ -8,7 +8,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 ### Using Project Level Gradle Dependency
 
 1. **Add Sign3SDK to the Dependency Block**
-   - Open your project level `build.gradle` file and add the following line to the dependencies block. Please collect the **username** and **password** from Sign3
+   - Open your project level `build.gradle` file and add the following line to the dependencies block. Please collect the **username** and **password** from Sign3.
 
      ```groovy
       repositories {
@@ -28,7 +28,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 ### Using App Level Gradle Dependency
 
 1. **Add Sign3SDK to the Dependency Block**
-   - Open your app's `build.gradle` file and add the following line to the dependencies block:
+   - Open your app's `build.gradle` file and add the following line to the dependencies block.
 
      ```groovy
      dependencies {
@@ -46,7 +46,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 
 ## App Permission
    1. Add the following permissions in the Manifest file.
-   2. Optional permissions are recommended to achieve higher accuracy
+   2. Optional permissions are recommended to achieve higher accuracy.
 
 ```java
 <uses-permission android:name="android.permission.INTERNET" />
@@ -60,9 +60,9 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 
 ## Initializing the SDK
 
-1. Initialize the SDK in the `onCreate()` method of your Application class. 
-2. Use the ClientID and Client Secret shared over email
-3. to enable a more in-depth root detection, you would need to add `enabledSign3Service` 
+1. Initialize the SDK in the `onCreate()` method of your Application class.
+2. Use the ClientID and Client Secret shared over email.
+3. to enable a more in-depth root detection, you would need to add `enabledSign3Service`.
 
 ### For Java
 
@@ -176,7 +176,7 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 ## Fetch Continuous Integration Result
 
 1. Device results can be retrieved at specific user checkpoints or activities, such as account registration, login, or checkout. This ensures there is adequate time to generate a device fingerprint.
-2. To retrive the device result via Continuous integration
+2. To retrive the device result via Continuous integration.
 
 ### For Java
 
