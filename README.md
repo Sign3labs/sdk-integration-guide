@@ -201,33 +201,34 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 ### For Java
 
 ```java
-Sign3Intelligence.getInstance(this).getContinuousIntegration(new IntelligenceListener() {
-       @Override
-       public void onSuccess(IntelligenceResponse response) {
-           // Do something with the response
-       }
-
-
-       @Override
-       public void onError(IntelligenceError error) {
-           // Something went wrong, handle the error message
-       }
-});
+ Sign3Intelligence.getInstance(this).onDemandCall(new DeviceStatusListener() {
+            @Override
+            public void isReady() {
+                IntelligenceResponse response = Sign3Intelligence.getInstance(this).getLatestDeviceResult();
+                if (response != null) {
+                    // Do something with the response
+                } else {
+                    IntelligenceError intelligenceError = Sign3Intelligence.getInstance(this).getResponseError();
+                    // Something went wrong, handle the error message
+                }
+            }
+        });
 ```
 
 ### For Kotlin
 
 ```kotlin
-Sign3Intelligence.getInstance(this).getContinuousIntegration(object : IntelligenceListener {
-   override fun onSuccess(response: IntelligenceResponse) {
-        // Do something with the response
-   }
-
-
-   override fun onError(error: IntelligenceError) {
-        // Something went wrong, handle the error message
-   }
-})
+ Sign3Intelligence.getInstance(this).onDemandCall(object : DeviceStatusListener{
+            override fun isReady() {
+                val response = Sign3Intelligence.getInstance(this).getLatestDeviceResult()
+                if (response != null){
+                   // Do something with the response
+                }else{
+                    val intelligenceError = Sign3Intelligence.getInstance(this).getResponseError()
+                    // Something went wrong, handle the error message
+                }
+            }
+        })
 ```
 
 <br>
@@ -244,7 +245,8 @@ Sign3Intelligence.getInstance(this).getContinuousIntegration(object : Intelligen
   "vpn": false,
   "proxy": false,
   "emulator": true,
-  "remoteAccess": false,
+  "remoteAppProviders": false,
+  "mirroredScreen": false,
   "cloned": false,
   "geoSpoofed": false,
   "rooted": false,
