@@ -54,6 +54,8 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.READ_SMS"/>
+
 ```
 
 <br>
