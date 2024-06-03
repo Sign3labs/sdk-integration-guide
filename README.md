@@ -40,6 +40,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
      }
      ```
    - For the most recent latest version, connect with Sign3.
+   - Checkout the [here] (https://github.com/Sign3labs/sdk-integration-guide/edit/change_readme/README.md#changelog)
 2. **After adding the dependency, sync your project with Gradle files to ensure the library is properly integrated.**
 
 <br>
@@ -53,6 +54,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 <!-- optional -->
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<!-- Below mentioned optional permissions are taken to calculate sim affinity to the device  -->
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 <uses-permission android:name="android.permission.READ_SMS"/>
 
@@ -73,7 +75,6 @@ Options options = new Options.Builder()
            .setClientId("SIGN3_CLIENT_ID")
            .setClientSecret("SIGN3_CLIENT_SECRET")
            .setEnvironment(Options.ENV_PROD)
-           .enabledSign3Service(true)
            .build();
 
 Sign3Intelligence.getInstance(this).initAsync(options, new Callback<Boolean>() {
@@ -91,7 +92,6 @@ val options = Options.Builder()
    .setClientId("SIGN3_CLIENT_ID")
    .setClientSecret("SIGN3_CLIENT_SECRET")
    .setEnvironment(Options.ENV_PROD)
-   .enabledSign3Service(true)
    .build()
 
 
@@ -195,46 +195,6 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 
 <br>
 
-## Fetch Continuous Integration Result
-
-1. Device results can be retrieved at specific user checkpoints or activities, such as account registration, login, or checkout. This ensures there is adequate time to generate a device fingerprint.
-2. To retrive the device result via Continuous integration.
-
-### For Java
-
-```java
- Sign3Intelligence.getInstance(this).onDemandCall(new DeviceStatusListener() {
-            @Override
-            public void isReady() {
-                IntelligenceResponse response = Sign3Intelligence.getInstance(this).getLatestDeviceResult();
-                if (response != null) {
-                    // Do something with the response
-                } else {
-                    IntelligenceError intelligenceError = Sign3Intelligence.getInstance(this).getResponseError();
-                    // Something went wrong, handle the error message
-                }
-            }
-        });
-```
-
-### For Kotlin
-
-```kotlin
- Sign3Intelligence.getInstance(this).onDemandCall(object : DeviceStatusListener{
-            override fun isReady() {
-                val response = Sign3Intelligence.getInstance(this).getLatestDeviceResult()
-                if (response != null){
-                   // Do something with the response
-                }else{
-                    val intelligenceError = Sign3Intelligence.getInstance(this).getResponseError()
-                    // Something went wrong, handle the error message
-                }
-            }
-        })
-```
-
-<br>
-
 ## Sample Device Result Response
 
 ### Successful Intelligence Response
@@ -284,3 +244,7 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 <br>
 
 
+## Changelog
+
+### 2.0.9
+ - Improved emulator detection
