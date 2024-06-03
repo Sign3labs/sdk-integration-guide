@@ -40,7 +40,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
      }
      ```
    - For the most recent latest version, connect with Sign3.
-   - Checkout the [here](https://github.com/Sign3labs/sdk-integration-guide/tree/change_readme?tab=readme-ov-file#changelog)
+   - Checkout the [latest_version](https://github.com/Sign3labs/sdk-integration-guide/tree/change_readme?tab=readme-ov-file#changelog)
 2. **After adding the dependency, sync your project with Gradle files to ensure the library is properly integrated.**
 
 <br>
@@ -247,4 +247,8 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 ## Changelog
 
 ### 2.0.9
- - Improved emulator detection
+ - Improved existing detection logic
+ - Improved stability of device hash
+ - Add new device signals to genrate better fingerprint
+ - Introducing new detection remote control, screen mirroring, hooking, factory reset, App tampering & current location
+ - SDK performance improvements and bug fixing
