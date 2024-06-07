@@ -56,8 +56,6 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 <!-- Below mentioned optional permissions are taken to calculate sim affinity to the device  -->
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-<uses-permission android:name="android.permission.READ_SMS"/>
-
 ```
 
 <br>
@@ -74,7 +72,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 Options options = new Options.Builder()
            .setClientId("SIGN3_CLIENT_ID")
            .setClientSecret("SIGN3_CLIENT_SECRET")
-           .setEnvironment(Options.ENV_PROD)
+           .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
            .build();
 
 Sign3Intelligence.getInstance(this).initAsync(options, new Callback<Boolean>() {
@@ -91,7 +89,7 @@ Sign3Intelligence.getInstance(this).initAsync(options, new Callback<Boolean>() {
 val options = Options.Builder()
    .setClientId("SIGN3_CLIENT_ID")
    .setClientSecret("SIGN3_CLIENT_SECRET")
-   .setEnvironment(Options.ENV_PROD)
+   .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
    .build()
 
 
@@ -116,6 +114,8 @@ You can add optional parameters like userId anytime and update the instance of S
         .setPhoneInputType(PhoneInputType.PASTED) //See PhoneInputType class
         .setOtpInputType(OtpInputType.AUTO_FILLED) //See OtpInputType class
         .setUserEventType(UserEventType.LOGIN) //See UserEventType class
+        .setMerchantId("<merchant_id>") // Set Merchant Id 
+
 
 Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
 ```
@@ -130,6 +130,7 @@ val updateOptions = UpdateOptions.Builder()
         .setPhoneInputType(PhoneInputType.PASTED) // See PhoneInputType class
         .setOtpInputType(OtpInputType.AUTO_FILLED) // See OtpInputType class
         .setUserEventType(UserEventType.LOGIN) // See UserEventType class
+        .setMerchantId("merchant_id") // Set Merchant Id 
         .build()
 
 Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
@@ -212,23 +213,10 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
   "cloned": false,
   "geoSpoofed": false,
   "rooted": false,
-  "riskScore": "high",
+  "sessionRiskScore": 12.78",
   "hooking": true,
   "factoryReset": false,
   "appTampering": false,
-  "gpsLocation": {
-    "latitude": 37.4222755,
-    "longitude": -122.0842218,
-    "countryName": "United States",
-    "countryCode": "US",
-    "adminArea": "California",
-    "subAdminArea": "Santa Clara County",
-    "featureName": "1650",
-    "postalCode": "94043",
-    "locality": "Mountain View",
-    "subLocality": null,
-    "address": "1650 Amphitheatre Pkwy, Mountain View, CA 94043, USA"
-  }
 }
 
 ```
@@ -237,7 +225,7 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 ```error
 {
   "requestId": "7e12d131-2d90-4529-a5c7-35f457d86ae6",
-  "errorMessage": "Failed to retrieve response"
+  "errorMessage": "Sign3 Server Error"
 }
 ```
 
@@ -246,7 +234,7 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 
 ## Changelog
 
-### 2.0.9
+### 3.0.0
  - Improved existing detection logic
  - Improved stability of device hash
  - Add new device signals to genrate better fingerprint
