@@ -8,7 +8,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 ### Using Project Level Gradle Dependency
 
 1. **Add Sign3SDK to the Dependency Block**
-   - Open your project level `build.gradle` file and add the following line to the dependencies block. Please collect the **username** and **password** from Sign3.
+   - Open your project level `build.gradle` file and add the following line to the dependencies block. Please collect the **username** and **password** from credentials documents.
 
      ```groovy
       repositories {
@@ -63,15 +63,15 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 ## Initializing the SDK
 
 1. Initialize the SDK in the `onCreate()` method of your Application class.
-2. Use the ClientID and Client Secret shared over email.
+2. Use the ClientID and Client Secret shared with the credentials document.
 3. to enable a more in-depth root detection, you would need to add `enabledSign3Service`.
 
 ### For Java
 
 ```java
 Options options = new Options.Builder()
-           .setClientId("SIGN3_CLIENT_ID")
-           .setClientSecret("SIGN3_CLIENT_SECRET")
+           .setClientId("<SIGN3_CLIENT_ID>")
+           .setClientSecret("<SIGN3_CLIENT_SECRET>")
            .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
            .build();
 
@@ -87,8 +87,8 @@ Sign3Intelligence.getInstance(this).initAsync(options, new Callback<Boolean>() {
 
 ```kotlin
 val options = Options.Builder()
-   .setClientId("SIGN3_CLIENT_ID")
-   .setClientSecret("SIGN3_CLIENT_SECRET")
+   .setClientId("<SIGN3_CLIENT_ID>")
+   .setClientSecret("<SIGN3_CLIENT_SECRET>")
    .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
    .build()
 
@@ -109,8 +109,8 @@ You can add optional parameters like userId anytime and update the instance of S
 ```java
 
  UpdateOptions updateOptions = new UpdateOptions.Builder()
-        .setUserId("user-id") // set user id here, you can reference the result in future
-        .setPhoneNumber("1234567890") // you can add the customer phone number
+        .setUserId("<user-id>") // Set user id here, you can reference the result in future
+        .setPhoneNumber("<1234567890>") // you can add the customer phone number
         .setPhoneInputType(PhoneInputType.PASTED) //See PhoneInputType class
         .setOtpInputType(OtpInputType.AUTO_FILLED) //See OtpInputType class
         .setUserEventType(UserEventType.LOGIN) //See UserEventType class
@@ -125,12 +125,12 @@ Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
 ```kotlin
 
 val updateOptions = UpdateOptions.Builder()
-        .setUserId("user-id") // Set user id here, you can reference the result in future
-        .setPhoneNumber("1234567890") // You can add the customer phone number
+        .setUserId("<user-id>") // Set user id here, you can reference the result in future
+        .setPhoneNumber("<1234567890>") // you can add the customer phone number
         .setPhoneInputType(PhoneInputType.PASTED) // See PhoneInputType class
         .setOtpInputType(OtpInputType.AUTO_FILLED) // See OtpInputType class
         .setUserEventType(UserEventType.LOGIN) // See UserEventType class
-        .setMerchantId("merchant_id") // Set Merchant Id 
+        .setMerchantId("<merchant_id>") // Set Merchant Id 
         .build()
 
 Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
