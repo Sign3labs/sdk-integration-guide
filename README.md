@@ -75,12 +75,7 @@ Options options = new Options.Builder()
            .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
            .build();
 
-Sign3Intelligence.getInstance(this).initAsync(options, new Callback<Boolean>() {
-       @Override
-       public void onResult(Boolean result) {
-           Log.i("AppInstance", "Sign3Intelligence init : " + result);
-       }
-});
+Sign3Intelligence.getInstance(this).initAsync(options);
 ```
 
 ### For Kotlin
@@ -98,7 +93,28 @@ Sign3Intelligence.getInstance(this).initAsync(options) {
    Log.i("AppInstance", "Sign3Intelligence init : $it")
 }
 ```
+**Note**: If you have any custom **Application Class**, please add the following code in the **onCreate()** method of that Application class before any other initialisation code.
 
+### For Java
+
+```java
+@Override
+public void onCreate() {
+     super.onCreate();
+     if (Sign3Intelligence.Companion.stop()) return;
+     // Other initialisation code
+}
+```
+
+### For Kotlin
+
+```kotlin
+override fun onCreate() {
+   super.onCreate()
+   if (Sign3Intelligence.stop()) return
+   // Other initialisation code
+}
+```
 <br>
 
 ## Optional Parameters
@@ -233,7 +249,6 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 
 
 ## Changelog
-
 ### 3.0.0
  - Improved existing detection logic
  - Improved stability of device hash
