@@ -250,12 +250,10 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 
 ## Changelog
 ### 3.0.2
- - Service issue fix
- - ANR (Application Not Responding) issue fix
- - SDK performance improvements and bug fixing
+ - Dependency resolved of Isolated Service
+ - Resolved ANR (Application Not Responding) issue fix
 ### 3.0.1
- - Removed service and made some minor changes
- - SDK performance improvements and bug fixes
+ - Temporarily removed dependency on Isolated service for this version
 ### 3.0.0
  - Improved existing detection logic
  - Improved stability of device hash
