@@ -250,13 +250,13 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 
 ## Changelog
 ### 3.0.2
- - Dependency resolved of Isolated Service
- - Resolved ANR (Application Not Responding) issue fix
+ - Resolve dependency issue with Isolated Service
+ - Fix ANR issue causing application unresponsiveness
 ### 3.0.1
- - Temporarily removed dependency on Isolated service for this version
+ - Temporarily remove Isolated service dependency, to be reintegrated in 3.0.2
 ### 3.0.0
  - Improved existing detection logic
  - Improved stability of device hash
- - Add new device signals to genrate better fingerprint
+ - Add new device signals to generate better fingerprint
  - Introducing new detection remote control, screen mirroring, hooking, factory reset, App tampering & current location
  - SDK performance improvements and bug fixing
