@@ -229,10 +229,10 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
   "cloned": false,
   "geoSpoofed": false,
   "rooted": false,
-  "sessionRiskScore": 12.78",
+  "sessionRiskScore": 12.78,
   "hooking": true,
   "factoryReset": false,
-  "appTampering": false,
+  "appTampering": false
 }
 
 ```
