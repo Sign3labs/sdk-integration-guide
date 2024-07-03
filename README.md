@@ -118,20 +118,32 @@ override fun onCreate() {
 <br>
 
 ## Optional Parameters
-You can add optional parameters like userId anytime and update the instance of Sign3Intelligence.
+1.	You can add optional parameters like UserId, Phone Number, etc., at any time and update the instance of Sign3Intelligence.
+3. Once the options are updated, they get reset. Clients need to explicitly update the options again to ingest them, or else the default value of OTHERS in userEventType will be sent to the backend.
+4. You need to call **getIntelligence()** function whenever you update the options.
+5. To update the Sign3Intelligence instance with optional parameters, including additional attributes, you can use the following examples.
+
 
 ### For Java
 
 ```java
+// Example of Additional Attributres
+Map<String, String> attributes = new HashMap<>();
 
- UpdateOptions updateOptions = new UpdateOptions.Builder()
-        .setUserId("<user-id>") // Set user id here, you can reference the result in future
-        .setPhoneNumber("<1234567890>") // you can add the customer phone number
-        .setPhoneInputType(PhoneInputType.PASTED) //See PhoneInputType class
-        .setOtpInputType(OtpInputType.AUTO_FILLED) //See OtpInputType class
-        .setUserEventType(UserEventType.LOGIN) //See UserEventType class
-        .setMerchantId("<merchant_id>") // Set Merchant Id 
+attributes.put("SIGN_UP_TIMESTAMP", String.valueOf(System.currentTimeMillis()));
+attributes.put("SIGNUP_METHOD", "PASSWORD/OTP/SOCIAL/TRUECALLER/OTHERS");
+attributes.put("REFERRED_BY", "UserID/Referral Code");
+attributes.put("PREFERRED_LANGUAGE", "English/Spanish/etc.");
 
+UpdateOptions updateOptions = new UpdateOptions.Builder()
+       .setUserId("<user-id>") // Set user id here, you can reference the result in future
+       .setPhoneNumber("<1234567890>") // you can add the customer phone number
+       .setPhoneInputType(PhoneInputType.PASTED) //See PhoneInputType class
+       .setOtpInputType(OtpInputType.AUTO_FILLED) //See OtpInputType class
+       .setUserEventType(UserEventType.SIGNUP) //See UserEventType class
+       .setMerchantId("<merchant_id>") // Set Merchant Id
+       .setAdditionalAttributes(attributes) // Set attributes to store key-value pairs.    
+       .build();
 
 Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
 ```
@@ -139,14 +151,25 @@ Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
 ### For Kotlin
 
 ```kotlin
+// Example of Additional Attributres
+val attributes = hashMapOf<String, String>()
+
+attributes["TRANSACTION_ID"] = UUID.randomUUID().toString()
+attributes["DEPOSIT"] = "<AMOUNT>"
+attributes["WITHDRAWAL"] = "<AMOUNT>"
+attributes["METHOD"] = "UPI/CARD/NET_BANKING/WALLET"
+attributes["STATUS"] = "SUCCESS/FAILURE"
+attributes["CURRENCY"] = "USD/INR/GBP/etc."
+attributes["TIMESTAMP"] = "${System.currentTimeMillis()}"
 
 val updateOptions = UpdateOptions.Builder()
         .setUserId("<user-id>") // Set user id here, you can reference the result in future
         .setPhoneNumber("<1234567890>") // you can add the customer phone number
         .setPhoneInputType(PhoneInputType.PASTED) // See PhoneInputType class
         .setOtpInputType(OtpInputType.AUTO_FILLED) // See OtpInputType class
-        .setUserEventType(UserEventType.LOGIN) // See UserEventType class
-        .setMerchantId("<merchant_id>") // Set Merchant Id 
+        .setUserEventType(UserEventType.TRANSACTION) // See UserEventType class
+        .setMerchantId("<merchant_id>") // Set Merchant Id
+        .setAdditionalAttributes(attributes) // Set attributes to store key-value pairs.   
         .build()
 
 Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
@@ -249,6 +272,9 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 
 
 ## Changelog
+### 3.0.3
+ - Adding the enum field UserEventType.OTHERS using the setUserEventType method.
+ - Setting the additional attributes using the setAdditionalAttributes method to Update Option.
 ### 3.0.2
  - Resolve dependency issue with Isolated Service
  - Fix ANR issue causing application unresponsiveness
