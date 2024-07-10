@@ -272,6 +272,8 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 
 
 ## Changelog
+### 3.1.0
+ - bug fixing for Root detection.
 ### 3.0.3
  - Adding the enum field UserEventType.OTHERS using the setUserEventType method.
  - Setting the additional attributes using the setAdditionalAttributes method to Update Option.
