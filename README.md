@@ -65,6 +65,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 1. Initialize the SDK in the `onCreate()` method of your Application class.
 2. Use the ClientID and Client Secret shared with the credentials document.
 3. to enable a more in-depth root detection, you would need to add `enabledSign3Service`.
+4. The SDK require a minimum SDK version of 23 if your app is targeting below this version must enclose Sign3 API calls within conditional checks.
 
 ### For Java
 
@@ -75,7 +76,9 @@ Options options = new Options.Builder()
            .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
            .build();
 
-Sign3Intelligence.getInstance(this).initAsync(options);
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    Sign3Intelligence.getInstance(this).initAsync(options);
+}
 ```
 
 ### For Kotlin
@@ -87,10 +90,11 @@ val options = Options.Builder()
    .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
    .build()
 
-
-Sign3Intelligence.getInstance(this).initAsync(options) {
-   // to check if the SDK is initialized correctly or not
-   Log.i("AppInstance", "Sign3Intelligence init : $it")
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    Sign3Intelligence.getInstance(this).initAsync(options) {
+       // to check if the SDK is initialized correctly or not
+       Log.i("AppInstance", "Sign3Intelligence init : $it")
+    }
 }
 ```
 **Note**: If you have any custom **Application Class**, please add the following code in the **onCreate()** method of that Application class before any other initialisation code.
@@ -146,6 +150,18 @@ UpdateOptions updateOptions = new UpdateOptions.Builder()
        .build();
 
 Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
+
+Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
+       @Override
+       public void onSuccess(IntelligenceResponse response) {
+           // Do something with the response
+       }
+
+       @Override
+       public void onError(IntelligenceError error) {
+           // Something went wrong, handle the error message
+       }
+});
 ```
 
 ### For Kotlin
@@ -173,6 +189,17 @@ val updateOptions = UpdateOptions.Builder()
         .build()
 
 Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
+
+Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListener {
+   override fun onSuccess(response: IntelligenceResponse) {
+        // Do something with the response
+   }
+
+   override fun onError(error: IntelligenceError) {
+        // Something went wrong, handle the error message
+   }
+})
+
 ```
 <br>
 
@@ -277,7 +304,7 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
  - Fixed native code issue on some devices.
  - Fixed camera supported FPS, BioMetricStatus issue.
  - Now, EventMetrics will be triggered only in case of failure.
- - Sign3 APIs now require a minimum SDK version of 23; apps targeting below this version must enclose Sign3 API calls within conditional checks.
+ - Sign3 APIs now require a minimum SDK version of 23, apps targeting below this version must enclose Sign3 API calls within conditional checks.
 ### 3.1.0
  - bug fixing for Root detection.
 ### 3.0.3
