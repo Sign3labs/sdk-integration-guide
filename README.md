@@ -273,10 +273,11 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 
 ## Changelog
 ### 3.1.1
- - Issue resoved of dlopen failed: library "libintelligence.so" not found
- - Fixed the 'Supported FPS ranges cannot be null' issue.
- - Addressed the error: 'BioMetricStatus cannot be cast to a non-null type android.hardware.fingerprint.FingerprintManager.'
- - Now, EventMetrics will be triggered only in case of failure."
+ - Fixed crash issue in android 6 & 7 devices.
+ - Fixed native code issue on some devices.
+ - Fixed camera supported FPS, BioMetricStatus issue.
+ - Now, EventMetrics will be triggered only in case of failure.
+ - Sign3 APIs now require a minimum SDK version of 23; apps targeting below this version must enclose Sign3 API calls within conditional checks.
 ### 3.1.0
  - bug fixing for Root detection.
 ### 3.0.3
