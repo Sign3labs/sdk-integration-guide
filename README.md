@@ -299,6 +299,8 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 
 
 ## Changelog
+### 3.2.1
+ - Bug fixing and minor changes.
 ### 3.2.0
  - Fixed crash issue in android 6 & 7 devices.
  - Fixed native code issue on some devices.
