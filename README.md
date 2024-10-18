@@ -1,4 +1,4 @@
-# Sign3 SDK Integration Guide
+# Sign3 SDK Integration Guide for Android
 
 The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess device security, detecting potential risks such as rooted devices, VPN connections, or remote access and much more. Providing insights into the device's safety, it enhances security measures against fraudulent activities and ensures a robust protection system.
 <br>
