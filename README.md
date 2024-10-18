@@ -301,50 +301,21 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 
 The intelligence response includes the following keys:
 
-- **requestId**: 
-  - A unique identifier for the specific request.
-  
-- **newDevice**: 
-  - Indicates if the device is new.
-  
-- **deviceId**: 
-  - A unique identifier for the device.
-  
-- **vpn**: 
-  - Indicates whether a VPN is active on the device.
-  
-- **proxy**: 
-  - Indicates whether a proxy server is in use.
-  
-- **emulator**: 
-  - Indicates if the app is running on an emulator.
-  
-- **remoteAppProviders**: 
-  - Indicates whether any remote applications are installed on the device.
-  
-- **mirroredScreen**: 
-  - Indicates if the device's screen is being mirrored.
-  
-- **cloned**: 
-  - Indicates if the user is using a cloned instance of the app.
-  
-- **geoSpoofed**: 
-  - Indicates if the device's location is being faked.
-  
-- **rooted**: 
-  - Indicates if the device has been modified for root access.
-  
-- **sessionRiskScore**: 
-  - A score representing the risk level of the session.
-  
-- **hooking**: 
-  - Indicates if the app has been altered by malicious code.
-  
-- **factoryReset**: 
-  - Indicates if a suspicious factory reset has been performed.
-  
-- **appTampering**: 
-  - Indicates if the app has been modified in an unauthorized way.
+- **requestId**: A unique identifier for the specific request.
+- **newDevice**: Indicates if the device is new.
+- **deviceId**: A unique identifier for the device.
+- **vpn**: Indicates whether a VPN is active on the device.
+- **proxy**: Indicates whether a proxy server is in use.
+- **emulator**: Indicates if the app is running on an emulator.
+- **remoteAppProviders**: Indicates whether any remote applications are installed on the device.
+- **mirroredScreen**: Indicates if the device's screen is being mirrored.
+- **cloned**: Indicates if the user is using a cloned instance of the app.
+- **geoSpoofed**: Indicates if the device's location is being faked.
+- **rooted**: Indicates if the device has been modified for root access.
+- **sessionRiskScore**: A score representing the risk level of the session.
+- **hooking**: Indicates if the app has been altered by malicious code.
+- **factoryReset**: Indicates if a suspicious factory reset has been performed.
+- **appTampering**: Indicates if the app has been modified in an unauthorized way.
 <br>
 
 ## Changelog
