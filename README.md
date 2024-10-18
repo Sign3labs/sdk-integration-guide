@@ -1,4 +1,4 @@
-# Sign3 SDK Integration Guide
+# Sign3 SDK Integration Guide for Android
 
 The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess device security, detecting potential risks such as rooted devices, VPN connections, or remote access and much more. Providing insights into the device's safety, it enhances security measures against fraudulent activities and ensures a robust protection system.
 <br>
@@ -297,8 +297,30 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 
 <br>
 
+## Intelligence Response
+
+The intelligence response includes the following keys:
+
+- **requestId**: A unique identifier for the specific request.
+- **newDevice**: Indicates if the device is new.
+- **deviceId**: A unique identifier for the device.
+- **vpn**: Indicates whether a VPN is active on the device.
+- **proxy**: Indicates whether a proxy server is in use.
+- **emulator**: Indicates if the app is running on an emulator.
+- **remoteAppProviders**: Indicates whether any remote applications are installed on the device.
+- **mirroredScreen**: Indicates if the device's screen is being mirrored.
+- **cloned**: Indicates if the user is using a cloned instance of the app.
+- **geoSpoofed**: Indicates if the device's location is being faked.
+- **rooted**: Indicates if the device has been modified for root access.
+- **sessionRiskScore**: A score representing the risk level of the session.
+- **hooking**: Indicates if the app has been altered by malicious code.
+- **factoryReset**: Indicates if a suspicious factory reset has been performed.
+- **appTampering**: Indicates if the app has been modified in an unauthorized way.
+<br>
 
 ## Changelog
+### 3.2.1
+ - Bug fixing and minor changes.
 ### 3.2.0
  - Fixed crash issue in android 6 & 7 devices.
  - Fixed native code issue on some devices.
