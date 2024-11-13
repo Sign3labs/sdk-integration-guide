@@ -1,4 +1,4 @@
-# Sign3 SDK Integration Guide
+# Sign3 SDK Integration Guide for Android
 
 The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess device security, detecting potential risks such as rooted devices, VPN connections, or remote access and much more. Providing insights into the device's safety, it enhances security measures against fraudulent activities and ensures a robust protection system.
 <br>
@@ -268,21 +268,65 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 
 ```response
 {
-  "requestId": "9ca5fa19-cc8c-4d67-ac43-ae301e50478a",
-  "newDevice": false,
-  "deviceId": "6c805eea-cb6a-4a1f-8896-eb7b4804556d",
-  "vpn": false,
-  "proxy": false,
-  "emulator": true,
-  "remoteAppProviders": false,
-  "mirroredScreen": false,
-  "cloned": false,
-  "geoSpoofed": false,
-  "rooted": false,
-  "sessionRiskScore": 12.78,
-  "hooking": true,
-  "factoryReset": false,
-  "appTampering": false
+    "requestId": "403ad427-5018-47b9-b6e8-790e17a78201",
+    "newDevice": false,
+    "deviceId": "43fccb70-d64a-4c32-a251-f07c082d7034",
+    "vpn": false,
+    "proxy": false,
+    "emulator": true,
+    "cloned": false,
+    "geoSpoofed": false,
+    "rooted": false,
+    "ip": "106.219.161.71",
+    "remoteAppProviders": false,
+    "remoteAppProvidersCount": 3,
+    "mirroredScreen": false,
+    "hooking": true,
+    "factoryReset": true,
+    "appTampering": true,
+    "sessionRiskScore": 99.50516,
+    "deviceRiskScore": 99.50516,
+    "clientUserIds": [
+        "difansd23r32",
+        "2390ksdfaksd"
+    ],
+    "sign3UserIds": [
+        "13asefnn324"
+    ],
+    "gpsLocation": {
+        "address": "F2620, Block F, Sushant Lok III, Sector 57, Gurugram, Haryana 122011, India",
+        "adminArea": "Haryana",
+        "countryCode": "IN",
+        "countryName": "India",
+        "featureName": "F2620",
+        "latitude": "28.420385999999997",
+        "locality": "Gurugram",
+        "longitude": "77.088926",
+        "postalCode": "122011",
+        "subAdminArea": "Gurgaon Division",
+        "subLocality": "Sector 57"
+    },
+    "ipDetails": {
+        "country": "IN",
+        "fraudScore": 27.0,
+        "city": "New Delhi",
+        "isp": null,
+        "latitude": 28.60000038,
+        "region": "National Capital Territory of Delhi",
+        "asn": "",
+        "longitude": 77.19999695
+    },
+    "simInfo": {
+        "simIds": [
+            {
+                "simSlotIndex": 0,
+                "carrierName": "Android",
+                "id": 1
+            }
+        ],
+        "totalSimUsed": 10
+    },
+    "additionalData": {}
 }
 
 ```
@@ -297,8 +341,41 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 
 <br>
 
+## Intelligence Response
+
+The intelligence response includes the following keys:
+
+- **requestId**: A unique identifier for the specific request.
+- **newDevice**: Indicates if the device is new.
+- **deviceId**: A unique identifier for the device.
+- **vpn**: Indicates whether a VPN is active on the device.
+- **proxy**: Indicates whether a proxy server is in use.
+- **emulator**: Indicates if the app is running on an emulator.
+- **remoteAppProviders**: Indicates whether any remote applications are installed on the device.
+- **mirroredScreen**: Indicates if the device's screen is being mirrored.
+- **cloned**: Indicates if the user is using a cloned instance of the app.
+- **geoSpoofed**: Indicates if the device's location is being faked.
+- **rooted**: Indicates if the device has been modified for root access.
+- **sessionRiskScore**: A score representing the risk level of the session.
+- **hooking**: Indicates if the app has been altered by malicious code.
+- **factoryReset**: Indicates if a suspicious factory reset has been performed.
+- **appTampering**: Indicates if the app has been modified in an unauthorized way.
+- **clientUserIds**: An array of user IDs assigned by the client that a device has seen till now.
+- **gpsLocation**: Details of the device's current GPS location, including latitude, longitude, and address information.
+- **ip**: The current IP address of the device.
+- **ipDetails**: Object added to capture ip related information and fraudScore related to ip address.
+- **sign3UserIds**: This will contain Sign3 generated userIds list till now the device has seen. Note: The logic for generating userId will be configured as per your business logic and can be customized.
+- **simInfo**: It will contain information like total sims used in a phone in its lifecycle, current sim+slot details.
+- **remoteAppProvidersCount**: The number of remote application providers detected on the device.
+- **deviceRiskScore**: The risk score of the device. Note: sessionRiskScore is derived from the latest state of the device but deviceRiskScore also factors in the historical state of the device (whether a device was rooted in any of the past sessions).
+- **additionalData**: Reserved for any extra or custom data not present in the IntelligenceResponse, providing a customized response based on specific requirements.
+<br>
 
 ## Changelog
+### 3.2.2
+ - Addition of Sim Info and few other fields in Intelligence Response.
+### 3.2.1
+ - Bug fixing and minor changes.
 ### 3.2.0
  - Fixed crash issue in android 6 & 7 devices.
  - Fixed native code issue on some devices.
