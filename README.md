@@ -372,8 +372,10 @@ The intelligence response includes the following keys:
 <br>
 
 ## Changelog
-### 3.2.3
+### 3.2.4
  - Minor bug fixes and improvements.
+### 3.2.3
+ - Added new signal and bug fixes.
 ### 3.2.2
  - Addition of Sim Info and few other fields in Intelligence Response.
 ### 3.2.1
