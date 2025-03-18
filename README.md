@@ -420,7 +420,7 @@ The intelligence response includes the following keys:
 - **remoteAppProvidersCount**: The number of remote application providers detected on the device.
 - **deviceRiskScore**: The risk score of the device. Note: sessionRiskScore is derived from the latest state of the device but deviceRiskScore also factors in the historical state of the device (whether a device was rooted in any of the past sessions).
 - **deviceMeta**: Contains all device-related information such as brand, model, screen resolution, total storage, etc.
-- **appAnalytics**: Provides categorized insights into installed applications, helping assess user behavior and potential risks. This is a custom response provided only based on specific requirements.
+- **appAnalytics**: This object provides a categorized mapping of applications, as classified by the Google Play Store. Categories may include, but are not limited to, books_and_reference, business, communication, lifestyle, etc. For applications lacking detailed categorization on the Play Store, their packages are grouped under a category labeled others (e.g., "com.onecode.battle.gfx.pro"). Note that by default, it is not included in the response. Please get in touch with us to enable the feature.
 - **additionalData**: Reserved for any extra or custom data not present in the IntelligenceResponse, providing a customized response based on specific requirements.
 <br>
 
