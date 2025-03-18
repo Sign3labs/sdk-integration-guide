@@ -326,9 +326,60 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
         ],
         "totalSimUsed": 10
     },
+  "appAnalytics": {
+        "categories": {
+            "business": [
+                "LinkedIn: Jobs & Business News",
+                "Naukri - Job Search App"
+            ],
+            "communication": [
+                "WhatsApp Messenger",
+                "Snapchat",
+                "Telegram"
+            ],
+            "entertainment": [
+                "JioHotstar",
+                "ZEE5 Movies, Web Series, Shows"
+            ],
+            "finance": [
+                "Policybazaar - Compare & Buy"
+            ],
+            "food_and_drink": [
+                "Swiggy: Food Instamart Dineout",
+                "Zomato: Food Delivery & Dining"
+            ],
+            "productivity": [
+                "UMANG",
+                "DigiLocker",
+                "GitHub"
+            ],
+            "shopping": [
+                "Amazon India Shop, Pay, miniTV",
+                "Flipkart Online Shopping App"
+            ],
+            "social": [
+                "Instagram",
+                "X"
+            ],
+            "travel_and_local": [
+                "IRCTC Rail Connect",
+                "MakeMyTrip Hotels, Flight, Bus"
+            ]
+        }
+    },
+    "deviceMeta": {
+        "cpuType": "Qualcomm Technologies, Inc SM7325",
+        "product": "I2126i",
+        "androidVersion": "14",
+        "storageAvailable": "29340553216",
+        "storageTotal": "111156146176",
+        "model": "I2126",
+        "screenResolution": "1080x2316",
+        "brand": "iQOO",
+        "totalRAM": "7679795200"
+    },
     "additionalData": {}
 }
-
 ```
 ### Error Response
 
@@ -368,10 +419,16 @@ The intelligence response includes the following keys:
 - **simInfo**: It will contain information like total sims used in a phone in its lifecycle, current sim+slot details.
 - **remoteAppProvidersCount**: The number of remote application providers detected on the device.
 - **deviceRiskScore**: The risk score of the device. Note: sessionRiskScore is derived from the latest state of the device but deviceRiskScore also factors in the historical state of the device (whether a device was rooted in any of the past sessions).
+- **deviceMeta**: Contains all device-related information such as brand, model, screen resolution, total storage, etc.
+- **appAnalytics**: Provides categorized insights into installed applications, helping assess user behavior and potential risks. This is a custom response provided only based on specific requirements.
 - **additionalData**: Reserved for any extra or custom data not present in the IntelligenceResponse, providing a customized response based on specific requirements.
 <br>
 
 ## Changelog
+### 3.2.6
+ - Add new fields in the IntelligenceResponse object DeviceMeta & AppAnalytics.
+### 3.2.5
+ - Bug fixes and improvements.
 ### 3.2.4
  - Minor bug fixes and improvements.
 ### 3.2.3
