@@ -425,6 +425,8 @@ The intelligence response includes the following keys:
 <br>
 
 ## Changelog
+### 3.2.7
+ - Bug fixes and improvements.
 ### 3.2.6
  - Add new fields in the IntelligenceResponse object DeviceMeta & AppAnalytics.
 ### 3.2.5
