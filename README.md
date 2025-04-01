@@ -425,6 +425,8 @@ The intelligence response includes the following keys:
 <br>
 
 ## Changelog
+### 3.2.8
+ - Minor bug fixes and improvements.
 ### 3.2.7
  - Bug fixes and improvements.
 ### 3.2.6
