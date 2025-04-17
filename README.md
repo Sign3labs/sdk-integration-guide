@@ -432,7 +432,7 @@ The intelligence response includes the following keys:
 ## Changelog
 ### 3.2.9
  -  Added functionality for factory reset time detection.
- -  Added app wise affluence score of user installed apps.
+ -  Added app wise affinity score of user installed apps.
 ### 3.2.8
  - Minor bug fixes and improvements.
 ### 3.2.7
