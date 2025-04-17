@@ -327,6 +327,10 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
         "totalSimUsed": 10
     },
   "appAnalytics": {
+        "appography": {
+            "Adventure": 0.5,
+            "Art & Design": 0.6
+        },
         "categories": {
             "business": [
                 "LinkedIn: Jobs & Business News",
@@ -378,7 +382,8 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
         "brand": "iQOO",
         "totalRAM": "7679795200"
     },
-    "additionalData": {}
+    "additionalData": {},
+    "factoryResetTime": 1743419662000
 }
 ```
 ### Error Response
@@ -425,6 +430,9 @@ The intelligence response includes the following keys:
 <br>
 
 ## Changelog
+### 3.2.9
+ -  Added functionality for factory reset time detection.
+ -  Added app wise affluence score of user installed apps.
 ### 3.2.8
  - Minor bug fixes and improvements.
 ### 3.2.7
