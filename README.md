@@ -326,45 +326,12 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
         ],
         "totalSimUsed": 10
     },
-  "appAnalytics": {
-        "categories": {
-            "business": [
-                "LinkedIn: Jobs & Business News",
-                "Naukri - Job Search App"
-            ],
-            "communication": [
-                "WhatsApp Messenger",
-                "Snapchat",
-                "Telegram"
-            ],
-            "entertainment": [
-                "JioHotstar",
-                "ZEE5 Movies, Web Series, Shows"
-            ],
-            "finance": [
-                "Policybazaar - Compare & Buy"
-            ],
-            "food_and_drink": [
-                "Swiggy: Food Instamart Dineout",
-                "Zomato: Food Delivery & Dining"
-            ],
-            "productivity": [
-                "UMANG",
-                "DigiLocker",
-                "GitHub"
-            ],
-            "shopping": [
-                "Amazon India Shop, Pay, miniTV",
-                "Flipkart Online Shopping App"
-            ],
-            "social": [
-                "Instagram",
-                "X"
-            ],
-            "travel_and_local": [
-                "IRCTC Rail Connect",
-                "MakeMyTrip Hotels, Flight, Bus"
-            ]
+    "appAnalytics": {
+        "affinity": {
+            "entertainment": 0.5,
+            "gaming": 0.6,
+            "productivity": 0.8,
+            "food_and_drink": 0.4
         }
     },
     "deviceMeta": {
@@ -378,7 +345,8 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
         "brand": "iQOO",
         "totalRAM": "7679795200"
     },
-    "additionalData": {}
+    "additionalData": {},
+    "factoryResetTime": 1743419662000
 }
 ```
 ### Error Response
@@ -425,9 +393,18 @@ The intelligence response includes the following keys:
 <br>
 
 ## Changelog
-### 3.2.7
+### 3.3.0
+ -  Contract change in AppAnalytics.
+ -  Handled potential crashes when SDK methods are accessed before proper initialization.
+ -  Fixed a critical production crash issue affecting stability.
+### :warning: 3.2.9 - To be deprecated due to internal issue. Do not use.
+ -  Added functionality for factory reset time detection.
+ -  Added app wise affinity score of user installed apps.
+### :warning: 3.2.8 - To be deprecated due to internal issue. Do not use.
+ - Minor bug fixes and improvements.
+### :warning: 3.2.7 - To be deprecated due to internal issue. Do not use.
  - Bug fixes and improvements.
-### 3.2.6
+### :warning: 3.2.6 - To be deprecated due to internal issue. Do not use.
  - Add new fields in the IntelligenceResponse object DeviceMeta & AppAnalytics.
 ### 3.2.5
  - Bug fixes and improvements.
