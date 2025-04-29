@@ -326,45 +326,12 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
         ],
         "totalSimUsed": 10
     },
-  "appAnalytics": {
-        "categories": {
-            "business": [
-                "LinkedIn: Jobs & Business News",
-                "Naukri - Job Search App"
-            ],
-            "communication": [
-                "WhatsApp Messenger",
-                "Snapchat",
-                "Telegram"
-            ],
-            "entertainment": [
-                "JioHotstar",
-                "ZEE5 Movies, Web Series, Shows"
-            ],
-            "finance": [
-                "Policybazaar - Compare & Buy"
-            ],
-            "food_and_drink": [
-                "Swiggy: Food Instamart Dineout",
-                "Zomato: Food Delivery & Dining"
-            ],
-            "productivity": [
-                "UMANG",
-                "DigiLocker",
-                "GitHub"
-            ],
-            "shopping": [
-                "Amazon India Shop, Pay, miniTV",
-                "Flipkart Online Shopping App"
-            ],
-            "social": [
-                "Instagram",
-                "X"
-            ],
-            "travel_and_local": [
-                "IRCTC Rail Connect",
-                "MakeMyTrip Hotels, Flight, Bus"
-            ]
+    "appAnalytics": {
+        "affinity": {
+            "entertainment": 0.5,
+            "gaming": 0.6,
+            "productivity": 0.8,
+            "food_and_drink": 0.4
         }
     },
     "deviceMeta": {
@@ -378,7 +345,8 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
         "brand": "iQOO",
         "totalRAM": "7679795200"
     },
-    "additionalData": {}
+    "additionalData": {},
+    "factoryResetTime": 1743419662000
 }
 ```
 ### Error Response
@@ -389,45 +357,55 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
   "errorMessage": "Sign3 Server Error"
 }
 ```
-
 <br>
 
 ## Intelligence Response
 
-The intelligence response includes the following keys:
+| Field                     | Type               | Description                                                                                                                                                                                                                                                                                                                                                                                | Default Value             |
+|---------------------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+| requestId                 | string             | A unique identifier for the specific request.                                                                                                                                                                                                                                                                                                                                             | ""          |
+| newDevice                 | boolean            | Indicates if the device is new.                                                                                                                                                                                                                                                                                                                                                            | false                     |
+| deviceId                  | string             | A unique identifier for the device.                                                                                                                                                                                                                                                                                                                                                        | ""          |
+| vpn                       | boolean            | Indicates whether a VPN is active on the device.                                                                                                                                                                                                                                                                                                                                          | false                     |
+| proxy                     | boolean            | Indicates whether a proxy server is in use.                                                                                                                                                                                                                                                                                                                                               | false                     |
+| emulator                  | boolean            | Indicates if the app is running on an emulator.                                                                                                                                                                                                                                                                                                                                           | false                     |
+| remoteAppProviders        | boolean            | Indicates whether any remote applications are installed on the device.                                                                                                                                                                                                                                                                                                                    | false                     |
+| mirroredScreen            | boolean            | Indicates if the device's screen is being mirrored.                                                                                                                                                                                                                                                                                                                                       | false                     |
+| cloned                    | boolean            | Indicates if the user is using a cloned instance of the app.                                                                                                                                                                                                                                                                                                                              | false                     |
+| geoSpoofed                | boolean            | Indicates if the device's location is being faked.                                                                                                                                                                                                                                                                                                                                        | false                     |
+| rooted                    | boolean            | Indicates if the device has been modified for root access.                                                                                                                                                                                                                                                                                                                                | false                     |
+| sessionRiskScore          | float     | A score representing the risk level of the session.                                                                                                                                                                                                                                                                                                                                       | 0.0                       |
+| hooking                   | boolean            | Indicates if the app has been altered by malicious code.                                                                                                                                                                                                                                                                                                                                  | false                     |
+| factoryReset              | boolean            | Indicates if a suspicious factory reset has been performed.                                                                                                                                                                                                                                                                                                                               | false                     |
+| factoryResetTime                 | long             | Timestamp of last factory reset. If not detected, the default is `-1`                                                                                                                                                                                                                                                                                                                                            | -1 (if not detected)          |
+| appTampering              | boolean            | Indicates if the app has been modified in an unauthorized way.                                                                                                                                                                                                                                                                                                                            | false                     |
+| clientUserIds             | array of strings   | An array of user IDs assigned by the client that a device has seen till now.                                                                                                                                                                                                                                                                                                               | []                        |
+| gpsLocation               | object             | Details of the device's current GPS location, including latitude, longitude, and address information.                                                                                                                                                                                                                                                                                     | {}                        |
+| ip                        | string             | The current IP address of the device.                                                                                                                                                                                                                                                                                                                                                     | ""          |
+| ipDetails                 | object             | Object added to capture IP-related information and fraudScore related to IP address.                                                                                                                                                                                                                                                                                                       | {}                        |
+| sign3UserIds              | array of strings   | This will contain Sign3 generated userIds list till now the device has seen. Note: The logic for generating userId will be configured as per your business logic and can be customized.                                                                                                                                                                                               | []                        |
+| simInfo                   | object             | It will contain information like total sims used in a phone in its lifecycle, current sim+slot details.                                                                                                                                                                                                                                                                                    | {}                        |
+| remoteAppProvidersCount   | number             | The number of remote application providers detected on the device.                                                                                                                                                                                                                                                                                                                        | 0                         |
+| deviceRiskScore           | float     | The risk score of the device. Note: sessionRiskScore is derived from the latest state of the device but deviceRiskScore also factors in the historical state of the device (whether a device was rooted in any of the past sessions).                                                                                                                                                     | 0.0                       |
+| deviceMeta                | object             | Contains all device-related information such as brand, model, screen resolution, total storage, etc.                                                                                                                                                                                                                                                                                       | {}                        |
+| appAnalytics              | object             | An object containing an affinity field, which holds key-value pairs where each key is a category (e.g., entertainment, tech, gaming), and the value is a floating-point number between 0 and 1 representing the user's affinity score for that category. Higher scores indicate stronger interest, and lower scores suggest less interest. These scores are based on the apps installed on the user's device. | {} |
+| additionalData            | object             | Reserved for any extra or custom data not present in the IntelligenceResponse, providing a customized response based on specific requirements.                                                                                                                                                                                     | {} |
 
-- **requestId**: A unique identifier for the specific request.
-- **newDevice**: Indicates if the device is new.
-- **deviceId**: A unique identifier for the device.
-- **vpn**: Indicates whether a VPN is active on the device.
-- **proxy**: Indicates whether a proxy server is in use.
-- **emulator**: Indicates if the app is running on an emulator.
-- **remoteAppProviders**: Indicates whether any remote applications are installed on the device.
-- **mirroredScreen**: Indicates if the device's screen is being mirrored.
-- **cloned**: Indicates if the user is using a cloned instance of the app.
-- **geoSpoofed**: Indicates if the device's location is being faked.
-- **rooted**: Indicates if the device has been modified for root access.
-- **sessionRiskScore**: A score representing the risk level of the session.
-- **hooking**: Indicates if the app has been altered by malicious code.
-- **factoryReset**: Indicates if a suspicious factory reset has been performed.
-- **appTampering**: Indicates if the app has been modified in an unauthorized way.
-- **clientUserIds**: An array of user IDs assigned by the client that a device has seen till now.
-- **gpsLocation**: Details of the device's current GPS location, including latitude, longitude, and address information.
-- **ip**: The current IP address of the device.
-- **ipDetails**: Object added to capture ip related information and fraudScore related to ip address.
-- **sign3UserIds**: This will contain Sign3 generated userIds list till now the device has seen. Note: The logic for generating userId will be configured as per your business logic and can be customized.
-- **simInfo**: It will contain information like total sims used in a phone in its lifecycle, current sim+slot details.
-- **remoteAppProvidersCount**: The number of remote application providers detected on the device.
-- **deviceRiskScore**: The risk score of the device. Note: sessionRiskScore is derived from the latest state of the device but deviceRiskScore also factors in the historical state of the device (whether a device was rooted in any of the past sessions).
-- **deviceMeta**: Contains all device-related information such as brand, model, screen resolution, total storage, etc.
-- **appAnalytics**: This object provides a categorized mapping of applications, as classified by the Google Play Store. Categories may include, but are not limited to, books_and_reference, business, communication, lifestyle, etc. For applications lacking detailed categorization on the Play Store, their packages are grouped under a category labeled others (e.g., "com.onecode.battle.gfx.pro"). Note that by default, it is not included in the response. Please get in touch with us to enable the feature.
-- **additionalData**: Reserved for any extra or custom data not present in the IntelligenceResponse, providing a customized response based on specific requirements.
 <br>
 
 ## Changelog
-### 3.2.7
+### 3.3.0
+ -  Contract change in AppAnalytics.
+ -  Handled potential crashes when SDK methods are accessed before proper initialization.
+ -  Fixed a critical production crash issue affecting stability.
+### :warning: 3.2.9 - To be deprecated due to internal issue. Do not use.
+ -  Added functionality for factory reset time detection.
+ -  Added app wise affinity score of user installed apps.
+### :warning: 3.2.8 - To be deprecated due to internal issue. Do not use.
+ - Minor bug fixes and improvements.
+### :warning: 3.2.7 - To be deprecated due to internal issue. Do not use.
  - Bug fixes and improvements.
-### 3.2.6
+### :warning: 3.2.6 - To be deprecated due to internal issue. Do not use.
  - Add new fields in the IntelligenceResponse object DeviceMeta & AppAnalytics.
 ### 3.2.5
  - Bug fixes and improvements.
