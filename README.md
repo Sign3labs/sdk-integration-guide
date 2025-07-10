@@ -33,10 +33,10 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
      ```groovy
      dependencies {
          // For compile sdk upto 34
-         implementation 'com.sign3.intelligence:intelligence-playstore:3.4.1'
+         implementation 'com.sign3.intelligence:intelligence-playstore:3.x.x'
 
          // For compile sdk > 34
-         implementation 'com.sign3.intelligence:intelligence-playstore:4.0.1'
+         implementation 'com.sign3.intelligence:intelligence-playstore:4.x.x'
      }
      ```
    - For the most recent latest version, connect with Sign3.
