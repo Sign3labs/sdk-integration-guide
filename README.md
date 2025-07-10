@@ -32,11 +32,11 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 
      ```groovy
      dependencies {
-         // For non play store application
-         implementation 'com.sign3.intelligence:intelligence:<latest_version>'
+         // For compile sdk upto 34
+         implementation 'com.sign3.intelligence:intelligence-playstore:3.4.1'
 
-         // For play store application
-         implementation 'com.sign3.intelligence:intelligence-playstore:<latest_version>'
+         // For compile sdk > 34
+         implementation 'com.sign3.intelligence:intelligence-playstore:4.0.1'
      }
      ```
    - For the most recent latest version, connect with Sign3.
@@ -394,6 +394,21 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 <br>
 
 ## Changelog
+### 4.0.1
+ - Bug fixing for Root detection.
+ - Fastened sdk initialization time by 30%.
+ - Compatible with Android SDK version greater then 34
+### 4.0.0
+ - Expanded Android Compatibility: SDK now supports Android 16 (previously supported only upto Android 14)
+ - Kotlin Updated: Upgraded Kotlin version to 2.1.0 for better language features, performance, and compatibility.
+ - Gradle Updated: Upgraded Gradle to 8.0+ to support latest build tools and Kotlin updates.
+### 3.4.1
+ - Bug fixing for Root detection.
+ - Fastened sdk initialization time by 30%.
+ - Compatible with Android SDK version up to 34
+### 3.4.0
+ - Advance root detection checks added.
+ - Minor bug fixes and performance improvements
 ### 3.3.0
  -  Contract change in AppAnalytics.
  -  Handled potential crashes when SDK methods are accessed before proper initialization.
