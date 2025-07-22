@@ -394,6 +394,10 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 <br>
 
 ## Changelog
+### 4.0.2
+ - Added AIRPLANE mode signal.
+ - Fixed Android Keystore Exception bug found in some devices.
+ - Bug fixes and improvements.
 ### 4.0.1
  - Root detection bug resolved for devices with se-linux flag.
  - Fastened sdk initialization time by 30%.
@@ -402,6 +406,10 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
  - Expanded Android Compatibility: SDK now supports Android 16 (previously supported only upto Android 14)
  - Kotlin Updated: Upgraded Kotlin version to 2.1.0 for better language features, performance, and compatibility.
  - Gradle Updated: Upgraded Gradle to 8.0+ to support latest build tools and Kotlin updates.
+### 3.4.2
+ - Added AIRPLANE mode signal.
+ - Fixed Android Keystore Exception bug found in some devices.
+ - Bug fixes and improvements.
 ### 3.4.1
  - Root detection bug resolved for devices with se-linux flag.
  - Fastened sdk initialization time by 30%.
