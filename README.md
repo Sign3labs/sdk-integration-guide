@@ -66,47 +66,26 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 2. Use the ClientID and Client Secret shared with the credentials document.
 3. to enable a more in-depth root detection, you would need to add `enabledSign3Service`.
 4. The SDK require a minimum SDK version of 23 if your app is targeting below this version must enclose Sign3 API calls within conditional checks.
-
-### For Java
-
-```java
-Options options = new Options.Builder()
-           .setClientId("<SIGN3_CLIENT_ID>")
-           .setClientSecret("<SIGN3_CLIENT_SECRET>")
-           .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
-           .build();
-
-if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-    Sign3Intelligence.getInstance(this).initAsync(options);
-}
-```
-
-### For Kotlin
-
-```kotlin
-val options = Options.Builder()
-   .setClientId("<SIGN3_CLIENT_ID>")
-   .setClientSecret("<SIGN3_CLIENT_SECRET>")
-   .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
-   .build()
-
-if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-    Sign3Intelligence.getInstance(this).initAsync(options) {
-       // to check if the SDK is initialized correctly or not
-       Log.i("AppInstance", "Sign3Intelligence init : $it")
-    }
-}
-```
-**Note**: If you have any custom **Application Class**, please add the following code in the **onCreate()** method of that Application class before any other initialisation code.
+5. Add the `Sign3Intelligence.stop()` method as the first line in the `onCreate()` method of the Application class, before any other initialization code.
 
 ### For Java
 
 ```java
 @Override
 public void onCreate() {
-     super.onCreate();
-     if (Sign3Intelligence.Companion.stop()) return;
-     // Other initialisation code
+    super.onCreate();
+    if (Sign3Intelligence.Companion.stop()) return;
+    // Other initialisation code
+
+    Options options = new Options.Builder()
+            .setClientId("<SIGN3_CLIENT_ID>")
+            .setClientSecret("<SIGN3_CLIENT_SECRET>")
+            .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
+            .build();
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        Sign3Intelligence.getInstance(this).initAsync(options);
+    }
 }
 ```
 
@@ -114,9 +93,23 @@ public void onCreate() {
 
 ```kotlin
 override fun onCreate() {
-   super.onCreate()
-   if (Sign3Intelligence.stop()) return
-   // Other initialisation code
+    super.onCreate()
+    if (Sign3Intelligence.stop()) return
+    // Other initialisation code
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        val options = Options.Builder()
+            .setClientId("<SIGN3_CLIENT_ID>")
+            .setClientSecret("<SIGN3_CLIENT_SECRET>")
+            .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
+            .build()
+
+        Sign3Intelligence.getInstance(this).initAsync(options) {
+            // to check if the SDK is initialized correctly or not
+            Log.i("TAG_AppInstance", "Sign3Intelligence init : $it")
+        }
+    }
+
 }
 ```
 <br>
