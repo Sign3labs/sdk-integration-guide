@@ -49,7 +49,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
    1. Add the following permissions in the Manifest file.
    2. Optional permissions are recommended to achieve higher accuracy.
 
-```java
+```permission
 <uses-permission android:name="android.permission.INTERNET" />
 <!-- optional -->
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -66,28 +66,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 2. Use the ClientID and Client Secret shared with the credentials document.
 3. to enable a more in-depth root detection, you would need to add `enabledSign3Service`.
 4. The SDK require a minimum SDK version of 23 if your app is targeting below this version must enclose Sign3 API calls within conditional checks.
-5. Add the `Sign3Intelligence.stop()` method as the first line in the `onCreate()` method of the Application class, before any other initialization code.
-
-### For Java
-
-```java
-@Override
-public void onCreate() {
-    super.onCreate();
-    if (Sign3Intelligence.Companion.stop()) return;
-    // Other initialisation code
-
-    Options options = new Options.Builder()
-            .setClientId("<SIGN3_CLIENT_ID>")
-            .setClientSecret("<SIGN3_CLIENT_SECRET>")
-            .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
-            .build();
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        Sign3Intelligence.getInstance(this).initAsync(options);
-    }
-}
-```
+5. Add the `Sign3Intelligence.stop()` method as the first line in the `onCreate()` method after super.onCreate() of the Application class, before any other initialization code as shown.
 
 ### For Kotlin
 
@@ -112,6 +91,27 @@ override fun onCreate() {
 
 }
 ```
+
+### For Java
+
+```java
+@Override
+public void onCreate() {
+    super.onCreate();
+    if (Sign3Intelligence.Companion.stop()) return;
+    // Other initialisation code
+
+    Options options = new Options.Builder()
+            .setClientId("<SIGN3_CLIENT_ID>")
+            .setClientSecret("<SIGN3_CLIENT_SECRET>")
+            .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
+            .build();
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        Sign3Intelligence.getInstance(this).initAsync(options);
+    }
+}
+```
 <br>
 
 ## Optional Parameters
@@ -119,43 +119,6 @@ override fun onCreate() {
 3. Once the options are updated, they get reset. Clients need to explicitly update the options again to ingest them, or else the default value of OTHERS in userEventType will be sent to the backend.
 4. You need to call **getIntelligence()** function whenever you update the options.
 5. To update the Sign3Intelligence instance with optional parameters, including additional attributes, you can use the following examples.
-
-
-### For Java
-
-```java
-// Example of Additional Attributres
-Map<String, String> attributes = new HashMap<>();
-
-attributes.put("SIGN_UP_TIMESTAMP", String.valueOf(System.currentTimeMillis()));
-attributes.put("SIGNUP_METHOD", "PASSWORD/OTP/SOCIAL/TRUECALLER/OTHERS");
-attributes.put("REFERRED_BY", "UserID/Referral Code");
-attributes.put("PREFERRED_LANGUAGE", "English/Spanish/etc.");
-
-UpdateOptions updateOptions = new UpdateOptions.Builder()
-       .setUserId("<user-id>") // Set user id here, you can reference the result in future
-       .setPhoneNumber("<1234567890>") // you can add the customer phone number
-       .setPhoneInputType(PhoneInputType.PASTED) //See PhoneInputType class
-       .setOtpInputType(OtpInputType.AUTO_FILLED) //See OtpInputType class
-       .setUserEventType(UserEventType.SIGNUP) //See UserEventType class
-       .setMerchantId("<merchant_id>") // Set Merchant Id
-       .setAdditionalAttributes(attributes) // Set attributes to store key-value pairs.    
-       .build();
-
-Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
-
-Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
-       @Override
-       public void onSuccess(IntelligenceResponse response) {
-           // Do something with the response
-       }
-
-       @Override
-       public void onError(IntelligenceError error) {
-           // Something went wrong, handle the error message
-       }
-});
-```
 
 ### For Kotlin
 
@@ -194,19 +157,48 @@ Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListene
 })
 
 ```
+
+### For Java
+
+```java
+// Example of Additional Attributres
+Map<String, String> attributes = new HashMap<>();
+
+attributes.put("SIGN_UP_TIMESTAMP", String.valueOf(System.currentTimeMillis()));
+attributes.put("SIGNUP_METHOD", "PASSWORD/OTP/SOCIAL/TRUECALLER/OTHERS");
+attributes.put("REFERRED_BY", "UserID/Referral Code");
+attributes.put("PREFERRED_LANGUAGE", "English/Spanish/etc.");
+
+UpdateOptions updateOptions = new UpdateOptions.Builder()
+       .setUserId("<user-id>") // Set user id here, you can reference the result in future
+       .setPhoneNumber("<1234567890>") // you can add the customer phone number
+       .setPhoneInputType(PhoneInputType.PASTED) //See PhoneInputType class
+       .setOtpInputType(OtpInputType.AUTO_FILLED) //See OtpInputType class
+       .setUserEventType(UserEventType.SIGNUP) //See UserEventType class
+       .setMerchantId("<merchant_id>") // Set Merchant Id
+       .setAdditionalAttributes(attributes) // Set attributes to store key-value pairs.    
+       .build();
+
+Sign3Intelligence.getInstance(context).updateOptions(updateOptions)
+
+Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
+       @Override
+       public void onSuccess(IntelligenceResponse response) {
+           // Do something with the response
+       }
+
+       @Override
+       public void onError(IntelligenceError error) {
+           // Something went wrong, handle the error message
+       }
+});
+```
 <br>
 
 ## Get Session ID
 
 1. The Session ID is the unique identifier of a user's app session and serves as a reference point when retrieving the device result for that session.
 2. The Session ID follows the OS lifecycle management, in line with industry best practices. This means that a user's session remains active as long as the device maintains it, unless the user terminates the app or the device runs out of memory and has to kill the app.
- 
-### For Java
-
- ```java
-
-String sessionId = Sign3Intelligence.getInstance(this).getSessionId()
-```
 
 ### For Kotlin
 
@@ -214,12 +206,34 @@ String sessionId = Sign3Intelligence.getInstance(this).getSessionId()
 
 val sessionId = Sign3Intelligence.getInstance(this).getSessionId()
 ```
+ 
+### For Java
+
+ ```java
+
+String sessionId = Sign3Intelligence.getInstance(this).getSessionId()
+```
 <br>
 
 ## Fetch Device Intelligence Result
 
 1. To fetch the device intelligence data refer to the following code snippet.
 2. IntelligenceResponse and IntelligenceError models are exposed by the SDK.
+
+### For Kotlin
+
+```kotlin
+Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListener {
+   override fun onSuccess(response: IntelligenceResponse) {
+        // Do something with the response
+   }
+
+
+   override fun onError(error: IntelligenceError) {
+        // Something went wrong, handle the error message
+   }
+})
+```
 
 ### For Java
 
@@ -237,22 +251,6 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
        }
 });
 ```
-
-### For Kotlin
-
-```kotlin
-Sign3Intelligence.getInstance(this).getIntelligence(object : IntelligenceListener {
-   override fun onSuccess(response: IntelligenceResponse) {
-        // Do something with the response
-   }
-
-
-   override fun onError(error: IntelligenceError) {
-        // Something went wrong, handle the error message
-   }
-})
-```
-
 <br>
 
 ## Sample Device Result Response
