@@ -64,9 +64,8 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 
 1. Initialize the SDK in the `onCreate()` method of your Application class.
 2. Use the ClientID and Client Secret shared with the credentials document.
-3. to enable a more in-depth root detection, you would need to add `enabledSign3Service`.
-4. The SDK require a minimum SDK version of 23 if your app is targeting below this version must enclose Sign3 API calls within conditional checks.
-5. Add the `Sign3Intelligence.stop()` method as the first line in the `onCreate()` method after super.onCreate() of the Application class, before any other initialization code as shown.
+3. The SDK require a minimum SDK version of 23 if your app is targeting below this version must enclose Sign3 API calls within conditional checks.
+4. Add the `Sign3Intelligence.stop()` method as the first line in the `onCreate()` method after super.onCreate() of the Application class, before any other initialization code as shown.
 
 ### For Kotlin
 
