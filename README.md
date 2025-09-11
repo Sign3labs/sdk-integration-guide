@@ -384,6 +384,13 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 <br>
 
 ## Changelog
+### 4.0.4
+ - Optimized intelligence response time.
+ - Other bug fixes and improvements.
+### 4.0.3
+ - Improved Location Accuracy.
+ - Added permission related signals.
+ - Minor bug fixes and improvements.
 ### 4.0.2
  - Added AIRPLANE mode signal.
  - Fixed Android Keystore Exception bug found in some devices.
