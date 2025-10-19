@@ -37,6 +37,9 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 
          // For compile sdk > 34
          implementation 'com.sign3.intelligence:intelligence-playstore:4.x.x'
+
+         // For lite version
+         implementation 'com.sign3.intelligence:intelligence-playstore-lite:4.x.x'
      }
      ```
    - For the most recent latest version, connect with Sign3.
@@ -395,6 +398,7 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  - Added AIRPLANE mode signal.
  - Fixed Android Keystore Exception bug found in some devices.
  - Bug fixes and improvements.
+ - Introduced lite version of sdk.
 ### 4.0.1
  - Root detection bug resolved for devices with se-linux flag.
  - Fastened sdk initialization time by 30%.
