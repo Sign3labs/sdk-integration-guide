@@ -217,6 +217,24 @@ String sessionId = Sign3Intelligence.getInstance(this).getSessionId()
 ```
 <br>
 
+## Behavioural
+The Behavioural feature in the SDK captures and analyzes how users interact with your app to build a detailed behavioral profile. It monitors device sensor data, including accelerometer, gyroscope, and other sensors, as well as touch interactions such as taps, scrolls, long presses, and additional signals. By examining these patterns, the SDK can detect unusual activity and potential fraud, helping you enhance security and gain deeper insights into user behavior.
+
+### StartAnalyzingBehaviour
+Use this method to begin capturing the user’s behavioral data. Call it at the point in your app where you want to start tracking interactions, such as when a user enters a specific screen or initiates a flow like login, signup, or payment page.
+
+```kotlin
+Sign3Intelligence.getInstance(this).startAnalyzingBehaviour()
+```
+### StopAnalyzingBehaviour
+The SDK will continue collecting data until you explicitly stop it, so you should manually halt tracking at the appropriate point, such as after a user completes login, signup or payment page.
+
+```kotlin
+Sign3Intelligence.getInstance(this).stopAnalyzingBehaviour()
+```
+
+<br>
+
 ## Fetch Device Intelligence Result
 
 1. To fetch the device intelligence data refer to the following code snippet.
@@ -387,6 +405,8 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 <br>
 
 ## Changelog
+### 5.0.0
+ - 
 ### 4.0.4
  - Optimized intelligence response time.
  - Other bug fixes and improvements.
