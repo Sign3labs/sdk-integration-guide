@@ -217,19 +217,34 @@ String sessionId = Sign3Intelligence.getInstance(this).getSessionId()
 ```
 <br>
 
-## Behavioural
-The Behavioural feature in the SDK captures and analyzes how users interact with your app to build a detailed behavioral profile. It monitors device sensor data, including accelerometer, gyroscope, and other sensors, as well as touch interactions such as taps, scrolls, long presses, and additional signals. By examining these patterns, the SDK can detect unusual activity and potential fraud, helping you enhance security and gain deeper insights into user behavior.
+## Behavioural Biometrics
+The Behavioural biometrics feature in the SDK captures and analyzes how users interact with your app to build a detailed behavioral profile. It monitors device sensor data, including accelerometer, gyroscope, and other sensors, as well as touch interactions such as taps, scrolls, long presses, and additional signals. By examining these patterns, the SDK can detect unusual activity and potential fraud, helping you enhance security and gain deeper insights into user behavior.
 
 ### StartAnalyzingBehaviour
-Use this method to begin capturing the user’s behavioral data. Call it at the point in your app where you want to start tracking interactions, such as when a user enters a specific screen or initiates a flow like login, signup, or payment page.
 
-```kotlin
-Sign3Intelligence.getInstance(this).startAnalyzingBehaviour()
+- Use this method to start capturing the user’s behavioral data.
+- Call it at the point in your app where you want to track interactions, such as on a specific screen or during flows like login, signup, or payment.
+- The function returns a capture ID for detailed insights tracking.
+- If `startAnalyzingBehaviour()` is called multiple times without calling `stopAnalyzingBehaviour()`, the same capture ID will be returned.
+
+### For Kotlin
+```start
+val captureId = Sign3Intelligence.getInstance(this).startAnalyzingBehaviour()
 ```
-### StopAnalyzingBehaviour
-The SDK will continue collecting data until you explicitly stop it, so you should manually halt tracking at the appropriate point, such as after a user completes login, signup or payment page.
 
-```kotlin
+### For Java
+ ```java
+String captureId = Sign3Intelligence.getInstance(this).startAnalyzingBehaviour()
+```
+
+### StopAnalyzingBehaviour
+
+- Use the function below to safely halt behavioral data collection.
+- Manually stop tracking at the appropriate point, such as after a user completes login, signup, or payment.
+- The SDK continues collecting data until you explicitly stop it.
+- Data collection will automatically stop if the app is killed, but it is recommended to stop it manually.
+
+```stop
 Sign3Intelligence.getInstance(this).stopAnalyzingBehaviour()
 ```
 
@@ -406,7 +421,10 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 
 ## Changelog
 ### 5.0.0
- - 
+ - Analyze every user interaction for potential fraud using behavioral biometrics.
+ - Use passive analysis of keystrokes, touches, swipes, sensors, and pointer movements to proactively prevent modern fraud.
+ - ANR issues have been identified and fixed.
+ - Other minor bugs resolved and overall performance improvements.
 ### 4.0.4
  - Optimized intelligence response time.
  - Other bug fixes and improvements.
