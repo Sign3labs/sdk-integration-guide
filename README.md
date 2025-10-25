@@ -218,7 +218,7 @@ String sessionId = Sign3Intelligence.getInstance(this).getSessionId()
 <br>
 
 ## Behavioural Biometrics
-The Behavioural biometrics feature in the SDK captures and analyzes how users interact with your app to build a detailed behavioral profile. It monitors device sensor data, including accelerometer, gyroscope, and other sensors, as well as touch interactions such as taps, scrolls, long presses, and additional signals. By examining these patterns, the SDK can detect unusual activity and potential fraud, helping you enhance security and gain deeper insights into user behavior.
+The Behavioural biometrics feature in the SDK captures and analyzes how users interact with your app to build a detailed behavioural profile. It monitors device sensor data, including accelerometer, gyroscope, and other sensors, as well as touch interactions such as taps, scrolls, long presses, and additional signals. By examining these patterns, the SDK can detect unusual activity and potential fraud, helping you enhance security and gain deeper insights into user behavior.
 
 ### StartAnalyzingBehaviour
 
@@ -239,7 +239,7 @@ String captureId = Sign3Intelligence.getInstance(this).startAnalyzingBehaviour()
 
 ### StopAnalyzingBehaviour
 
-- Use the function below to safely halt behavioral data collection.
+- Use the function below to safely halt behavioural data collection.
 - Manually stop tracking at the appropriate point, such as after a user completes login, signup, or payment.
 - The SDK continues collecting data until you explicitly stop it.
 - Data collection will automatically stop if the app is killed, but it is recommended to stop it manually.
