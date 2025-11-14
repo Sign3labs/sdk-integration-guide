@@ -68,16 +68,20 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 1. Initialize the SDK in the `onCreate()` method of your Application class.
 2. Use the ClientID and Client Secret shared with the credentials document.
 3. The SDK require a minimum SDK version of 23 if your app is targeting below this version must enclose Sign3 API calls within conditional checks.
-4. Add the `Sign3Intelligence.stop()` method as the first line in the `onCreate()` method after super.onCreate() of the Application class, before any other initialization code as shown.
+
+> **⚠️ Note**  
+> Add the `Sign3Intelligence.stop()` method as the first line in the `onCreate()` method after super.onCreate() of the Application class, before any other initialization code as shown.
 
 ### For Kotlin
 
 ```kotlin
 override fun onCreate() {
     super.onCreate()
-    if (Sign3Intelligence.stop()) return
-    // Other initialisation code
 
+    // Note: Please add this line just after the super.onCreate() in the Application class to avoid crashes.
+    if (Sign3Intelligence.stop()) return 
+    
+    // Other initialisation code
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         val options = Options.Builder()
             .setClientId("<SIGN3_CLIENT_ID>")
@@ -86,7 +90,6 @@ override fun onCreate() {
             .build()
 
         Sign3Intelligence.getInstance(this).initAsync(options) {
-            // to check if the SDK is initialized correctly or not
             Log.i("TAG_AppInstance", "Sign3Intelligence init : $it")
         }
     }
@@ -100,9 +103,11 @@ override fun onCreate() {
 @Override
 public void onCreate() {
     super.onCreate();
-    if (Sign3Intelligence.Companion.stop()) return;
-    // Other initialisation code
 
+    // Note: Please add this line just after the super.onCreate() in the Application class to avoid crashes.
+    if (Sign3Intelligence.Companion.stop()) return;
+
+    // Other initialisation code
     Options options = new Options.Builder()
             .setClientId("<SIGN3_CLIENT_ID>")
             .setClientSecret("<SIGN3_CLIENT_SECRET>")
@@ -316,9 +321,6 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
         "difansd23r32",
         "2390ksdfaksd"
     ],
-    "sign3UserIds": [
-        "13asefnn324"
-    ],
     "gpsLocation": {
         "address": "F2620, Block F, Sushant Lok III, Sector 57, Gurugram, Haryana 122011, India",
         "adminArea": "Haryana",
@@ -409,7 +411,6 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 | gpsLocation               | object             | Details of the device's current GPS location, including latitude, longitude, and address information.                                                                                                                                                                                                                                                                                     | {}                        |
 | ip                        | string             | The current IP address of the device.                                                                                                                                                                                                                                                                                                                                                     | ""          |
 | ipDetails                 | object             | Object added to capture IP-related information and fraudScore related to IP address.                                                                                                                                                                                                                                                                                                       | {}                        |
-| sign3UserIds              | array of strings   | This will contain Sign3 generated userIds list till now the device has seen. Note: The logic for generating userId will be configured as per your business logic and can be customized.                                                                                                                                                                                               | []                        |
 | simInfo                   | object             | It will contain information like total sims used in a phone in its lifecycle, current sim+slot details.                                                                                                                                                                                                                                                                                    | {}                        |
 | remoteAppProvidersCount   | number             | The number of remote application providers detected on the device.                                                                                                                                                                                                                                                                                                                        | 0                         |
 | deviceRiskScore           | float     | The risk score of the device. Note: sessionRiskScore is derived from the latest state of the device but deviceRiskScore also factors in the historical state of the device (whether a device was rooted in any of the past sessions).                                                                                                                                                     | 0.0                       |
@@ -432,6 +433,7 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  - Improved Location Accuracy.
  - Added permission related signals.
  - Minor bug fixes and improvements.
+ - Introduced lite version of sdk.
 ### 4.0.2
  - Added AIRPLANE mode signal.
  - Fixed Android Keystore Exception bug found in some devices.
