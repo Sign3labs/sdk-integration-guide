@@ -29,7 +29,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 2. **Add Sign3SDK Dependency Using Local Maven Repository**
 
    - Add this to pull the dependency from your local Maven folder inside the project
-   - Folder structure must be: YourProjectFileapp/local-maven-repo/com/sign3/intelligence/intelligence-playstore-lite/<version>
+   - Folder structure must be: YourProjectFile/app/<foldername>/com/sign3/intelligence/intelligence-playstore-lite/<version>
 
      ```groovy
       repositories {
@@ -38,7 +38,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
           maven { url 'https://jitpack.io' }
 
           maven {
-             url uri("${rootDir}/app/local-maven-repo")
+             url uri("${rootDir}/app/<foldername>")
           }
       }
       ```
