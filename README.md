@@ -5,10 +5,8 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 
 ## Adding Sign3SDK to Your Project
 
-### Using Project Level Gradle Dependency
-
-1. **Add Sign3SDK to the Dependency Block**
-   - Open your project level `build.gradle` file and add the following line to the dependencies block. Please collect the **username** and **password** from credentials documents.
+1. **Configure Project-Level Repository**
+   - Open your project level `build.gradle` file and add the following line to the repositories block. Please collect the **username** and **password** from credentials documents.
 
      ```groovy
       repositories {
@@ -25,10 +23,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
       }
       ```
 
-### Using App Level Gradle Dependency
-
-1. **Add Sign3SDK to the Dependency Block**
-   - Open your app's `build.gradle` file and add the following line to the dependencies block.
+2. **Add Sign3SDK Dependency in App-Level Gradle**
 
      ```groovy
      dependencies {
@@ -37,14 +32,11 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 
          // For compile sdk > 34
          implementation 'com.sign3.intelligence:intelligence-playstore:4.x.x'
-
-         // For lite version
-         implementation 'com.sign3.intelligence:intelligence-playstore-lite:4.x.x'
      }
      ```
-   - For the most recent latest version, connect with Sign3.
    - Checkout the [latest_version](https://github.com/Sign3labs/sdk-integration-guide/tree/main?tab=readme-ov-file#changelog)
-2. **After adding the dependency, sync your project with Gradle files to ensure the library is properly integrated.**
+
+3. **After adding the dependency, sync your project with Gradle files to ensure the library is properly integrated.**
 
 <br>
 
@@ -68,16 +60,20 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 1. Initialize the SDK in the `onCreate()` method of your Application class.
 2. Use the ClientID and Client Secret shared with the credentials document.
 3. The SDK require a minimum SDK version of 23 if your app is targeting below this version must enclose Sign3 API calls within conditional checks.
-4. Add the `Sign3Intelligence.stop()` method as the first line in the `onCreate()` method after super.onCreate() of the Application class, before any other initialization code as shown.
+
+> **⚠️ Note**    
+> *Add the `Sign3Intelligence.stop()` method as the first line in the `onCreate()` method after super.onCreate() of the Application class, before any other initialization code as shown.*
 
 ### For Kotlin
 
 ```kotlin
 override fun onCreate() {
     super.onCreate()
-    if (Sign3Intelligence.stop()) return
-    // Other initialisation code
 
+    // Note: Please add this line just after the super.onCreate() in the Application class to avoid crashes.
+    if (Sign3Intelligence.stop()) return
+
+    // Other initialisation code
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         val options = Options.Builder()
             .setClientId("<SIGN3_CLIENT_ID>")
@@ -100,9 +96,11 @@ override fun onCreate() {
 @Override
 public void onCreate() {
     super.onCreate();
-    if (Sign3Intelligence.Companion.stop()) return;
-    // Other initialisation code
 
+    // Note: Please add this line just after the super.onCreate() in the Application class to avoid crashes.
+    if (Sign3Intelligence.Companion.stop()) return;
+
+    // Other initialisation code
     Options options = new Options.Builder()
             .setClientId("<SIGN3_CLIENT_ID>")
             .setClientSecret("<SIGN3_CLIENT_SECRET>")
@@ -431,12 +429,10 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 ### 4.0.3
  - Improved Location Accuracy.
  - Added permission related signals.
- - Minor bug fixes and improvements.
 ### 4.0.2
  - Added AIRPLANE mode signal.
  - Fixed Android Keystore Exception bug found in some devices.
  - Bug fixes and improvements.
- - Introduced lite version of sdk.
 ### 4.0.1
  - Root detection bug resolved for devices with se-linux flag.
  - Fastened sdk initialization time by 30%.
