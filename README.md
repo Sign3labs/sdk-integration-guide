@@ -61,17 +61,11 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 2. Use the ClientID and Client Secret shared with the credentials document.
 3. The SDK require a minimum SDK version of 23 if your app is targeting below this version must enclose Sign3 API calls within conditional checks.
 
-> **⚠️ Note**    
-> *Add the `Sign3Intelligence.stop()` method as the first line in the `onCreate()` method after super.onCreate() of the Application class, before any other initialization code as shown.*
-
 ### For Kotlin
 
 ```kotlin
 override fun onCreate() {
     super.onCreate()
-
-    // Note: Please add this line just after the super.onCreate() in the Application class to avoid crashes.
-    if (Sign3Intelligence.stop()) return
 
     // Other initialisation code
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -97,9 +91,6 @@ override fun onCreate() {
 @Override
 public void onCreate() {
     super.onCreate();
-
-    // Note: Please add this line just after the super.onCreate() in the Application class to avoid crashes.
-    if (Sign3Intelligence.Companion.stop()) return;
 
     // Other initialisation code
     Options options = new Options.Builder()
