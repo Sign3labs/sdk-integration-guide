@@ -33,7 +33,7 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
    }
    ```
 
-   **Option 2: Device Intelligence + Behavioural Intelligence**
+   **Option 2: Device Intelligence + Behavioural Biometrics**
 
    ```groovy
    dependencies {
