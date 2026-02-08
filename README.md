@@ -25,14 +25,24 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 
 2. **Add Sign3SDK Dependency in App-Level Gradle**
 
-     ```groovy
-     dependencies {
-         implementation 'com.sign3.intelligence:intelligence-playstore:4.x.x'
-     }
-     ```
+   **Option 1: Device Intelligence only**
+   
+   ```groovy
+   dependencies {
+       implementation 'com.sign3.intelligence:intelligence-playstore:4.x.x'
+   }
+   ```
+
+   **Option 2: Device Intelligence + Behavioural Intelligence**
+
+   ```groovy
+   dependencies {
+       implementation 'com.sign3.intelligence:intelligence-playstore:5.x.x'
+   }
+   ```
    - Checkout the [latest_version](https://github.com/Sign3labs/sdk-integration-guide/tree/main?tab=readme-ov-file#changelog)
 
-3. **After adding the dependency, sync your project with Gradle files to ensure the library is properly integrated.**
+4. **After adding the dependency, sync your project with Gradle files to ensure the library is properly integrated.**
 
 <br>
 
