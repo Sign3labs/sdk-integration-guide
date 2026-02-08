@@ -25,18 +25,24 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 
 2. **Add Sign3SDK Dependency in App-Level Gradle**
 
-     ```groovy
-     dependencies {
-         // For compile sdk upto 34
-         implementation 'com.sign3.intelligence:intelligence-playstore:3.x.x'
+   **Option 1: Device Intelligence only**
+   
+   ```groovy
+   dependencies {
+       implementation 'com.sign3.intelligence:intelligence-playstore:4.x.x'
+   }
+   ```
 
-         // For compile sdk > 34
-         implementation 'com.sign3.intelligence:intelligence-playstore:4.x.x'
-     }
-     ```
+   **Option 2: Device Intelligence + Behavioural Biometrics**
+
+   ```groovy
+   dependencies {
+       implementation 'com.sign3.intelligence:intelligence-playstore:5.x.x'
+   }
+   ```
    - Checkout the [latest_version](https://github.com/Sign3labs/sdk-integration-guide/tree/main?tab=readme-ov-file#changelog)
 
-3. **After adding the dependency, sync your project with Gradle files to ensure the library is properly integrated.**
+4. **After adding the dependency, sync your project with Gradle files to ensure the library is properly integrated.**
 
 <br>
 
@@ -61,17 +67,11 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 2. Use the ClientID and Client Secret shared with the credentials document.
 3. The SDK require a minimum SDK version of 23 if your app is targeting below this version must enclose Sign3 API calls within conditional checks.
 
-> **⚠️ Note**    
-> *Add the `Sign3Intelligence.stop()` method as the first line in the `onCreate()` method after super.onCreate() of the Application class, before any other initialization code as shown.*
-
 ### For Kotlin
 
 ```kotlin
 override fun onCreate() {
     super.onCreate()
-
-    // Note: Please add this line just after the super.onCreate() in the Application class to avoid crashes.
-    if (Sign3Intelligence.stop()) return
 
     // Other initialisation code
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -97,9 +97,6 @@ override fun onCreate() {
 @Override
 public void onCreate() {
     super.onCreate();
-
-    // Note: Please add this line just after the super.onCreate() in the Application class to avoid crashes.
-    if (Sign3Intelligence.Companion.stop()) return;
 
     // Other initialisation code
     Options options = new Options.Builder()
@@ -317,9 +314,33 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
         "difansd23r32",
         "2390ksdfaksd"
     ],
-    "sign3UserIds": [
-        "13asefnn324"
-    ],
+     "appliedRules": {
+        "rules": {
+            "102 : Screen mirrored": 0,
+            "105 : Unusual Behaviour": "",
+            "109 : Transaction into black listed account": "",
+            "110 : Blacklist phone number": "",
+            "55 : VPN enabled": 0,
+            "58 : Remote access apps installed": "",
+            "6 : Professional profiles exists": 0,
+            "62 : account takeover high risk": 0,
+            "65 : multi carding high risk": 0,
+            "67 : account takeover medium risk": 0,
+            "68 : multi carding medium risk": 0,
+            "75 : social media account count more than 5": 0,
+            "77 : Users velocity": 0,
+            "91 : Money mule pincode": 0,
+            "92 : Blacklisted ip": 0,
+            "93 : More than 4 profiles associated with the device": 0,
+            "94 : Device identifiers changed": 0,
+            "95 : History of factory reset": 0,
+            "96 : More than 80 sims used": 0,
+            "97 : Phone number is not vintage": 0,
+            "98 : Email is not vintage": 0,
+            "99 : App is tampered": 50
+        },
+        "totalScore": 50.0
+    },
     "gpsLocation": {
         "address": "F2620, Block F, Sushant Lok III, Sector 57, Gurugram, Haryana 122011, India",
         "adminArea": "Haryana",
@@ -344,11 +365,18 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
         "longitude": 77.19999695
     },
     "simInfo": {
-        "simIds": [
+         "simIds": [
             {
+                "id": 1,
                 "simSlotIndex": 0,
-                "carrierName": "Android",
-                "id": 1
+                "carrierName": "JIO 4G | Jio",
+                "eSim": false
+            },
+            {
+                "id": 3,
+                "simSlotIndex": 1,
+                "carrierName": "airtel",
+                "eSim": true
             }
         ],
         "totalSimUsed": 10
@@ -415,8 +443,8 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 | remoteAppProvidersCount   | number             | The number of remote application providers detected on the device.                                                                                                                                                                                                                                                                                                                        | 0                         |
 | deviceRiskScore           | float     | The risk score of the device. Note: sessionRiskScore is derived from the latest state of the device but deviceRiskScore also factors in the historical state of the device (whether a device was rooted in any of the past sessions).                                                                                                                                                     | 0.0                       |
 | deviceMeta                | object             | Contains all device-related information such as brand, model, screen resolution, total storage, etc.                                                                                                                                                                                                                                                                                       | {}                        |
-| appAnalytics              | object             | An object containing an affinity field, which holds key-value pairs where each key is a category (e.g., entertainment, tech, gaming), and the value is a floating-point number between 0 and 1 representing the user's affinity score for that category. Higher scores indicate stronger interest, and lower scores suggest less interest. These scores are based on the apps installed on the user's device. | {} |
 | additionalData            | object             | Reserved for any extra or custom data not present in the IntelligenceResponse, providing a customized response based on specific requirements.                                                                                                                                                                                     | {} |
+| appliedRules            | object             | Returns the list of applied rules alongside the decision output, enabling the app to take immediate action (e.g., allow, warn, block) based on the exact rules fired.                                                                                                                                                                                     | {} |
 
 <br>
 
@@ -426,6 +454,24 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  - Use passive analysis of keystrokes, touches, swipes, sensors, and pointer movements to proactively prevent modern fraud.
  - ANR issues have been identified and fixed.
  - Other minor bugs resolved and overall performance improvements.
+### 4.0.7
+ - The SDK now returns the list of applied rules alongside the decision output, enabling the app to take immediate action (e.g., allow, warn, block) based on the exact rules fired.
+ - Added eSim detection: SDK now provides eSim detection at a particular sim slot directly in its response.
+ - Added accessibility signals: SDK now captures additional device signals related to active accessibility services (when enabled) to strengthen risk/fraud detection.
+ - Improved Hooking signal detection and reduce false positives.
+ - Improved ANR handling from native code.
+ - Enhanced error handling in the sdk thereby improving stability.
+ - Made the sdk integration easier by removing the mandatory .stop() check.
+### 4.0.6
+ - Optimised file read processes.
+ - Fixed crash issue on android versions 6 & 7.
+ - Improved sdk stability on low end devices.
+ - Improved coverage of dangerous packages.
+### 4.0.5
+ - Added multiple new signals like debugger attached, usb/wireless debugging, etc.
+ - Now you can enable/disable SSL pinning through Options.
+ - Improved Location Accuracy.
+ - Added permission related signals.
 ### 4.0.4
  - Optimized intelligence response time.
  - Other bug fixes and improvements.
@@ -459,15 +505,6 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  -  Contract change in AppAnalytics.
  -  Handled potential crashes when SDK methods are accessed before proper initialization.
  -  Fixed a critical production crash issue affecting stability.
-### :warning: 3.2.9 - To be deprecated due to internal issue. Do not use.
- -  Added functionality for factory reset time detection.
- -  Added app wise affinity score of user installed apps.
-### :warning: 3.2.8 - To be deprecated due to internal issue. Do not use.
- - Minor bug fixes and improvements.
-### :warning: 3.2.7 - To be deprecated due to internal issue. Do not use.
- - Bug fixes and improvements.
-### :warning: 3.2.6 - To be deprecated due to internal issue. Do not use.
- - Add new fields in the IntelligenceResponse object DeviceMeta & AppAnalytics.
 ### 3.2.5
  - Bug fixes and improvements.
 ### 3.2.4
@@ -484,7 +521,7 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  - Fixed camera supported FPS, BioMetricStatus issue.
  - Sign3 APIs now require a minimum SDK version of 23, apps targeting below this version must enclose Sign3 API calls within conditional checks.
 ### 3.1.0
- - bug fixing for Root detection.
+ - Bug fixing for Root detection.
 ### 3.0.3
  - Adding the enum field UserEventType.OTHERS using the setUserEventType method.
  - Setting the additional attributes using the setAdditionalAttributes method to Update Option.
