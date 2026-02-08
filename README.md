@@ -443,8 +443,8 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 | remoteAppProvidersCount   | number             | The number of remote application providers detected on the device.                                                                                                                                                                                                                                                                                                                        | 0                         |
 | deviceRiskScore           | float     | The risk score of the device. Note: sessionRiskScore is derived from the latest state of the device but deviceRiskScore also factors in the historical state of the device (whether a device was rooted in any of the past sessions).                                                                                                                                                     | 0.0                       |
 | deviceMeta                | object             | Contains all device-related information such as brand, model, screen resolution, total storage, etc.                                                                                                                                                                                                                                                                                       | {}                        |
-| appAnalytics              | object             | An object containing an affinity field, which holds key-value pairs where each key is a category (e.g., entertainment, tech, gaming), and the value is a floating-point number between 0 and 1 representing the user's affinity score for that category. Higher scores indicate stronger interest, and lower scores suggest less interest. These scores are based on the apps installed on the user's device. | {} |
-| additionalData            | object             | Returns the list of applied rules alongside the decision output, enabling the app to take immediate action (e.g., allow, warn, block) based on the exact rules fired.                                                                                                                                                                                     | {} |
+| additionalData            | object             | Reserved for any extra or custom data not present in the IntelligenceResponse, providing a customized response based on specific requirements.                                                                                                                                                                                     | {} |
+| appliedRules            | object             | Returns the list of applied rules alongside the decision output, enabling the app to take immediate action (e.g., allow, warn, block) based on the exact rules fired.                                                                                                                                                                                     | {} |
 
 <br>
 
@@ -466,7 +466,7 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  - Optimised file read processes.
  - Fixed crash issue on android versions 6 & 7.
  - Improved sdk stability on low end devices.
- - Improved coverage of dangerous packages
+ - Improved coverage of dangerous packages.
 ### 4.0.5
  - Added multiple new signals like debugger attached, usb/wireless debugging, etc.
  - Now you can enable/disable SSL pinning through Options.
@@ -505,15 +505,6 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  -  Contract change in AppAnalytics.
  -  Handled potential crashes when SDK methods are accessed before proper initialization.
  -  Fixed a critical production crash issue affecting stability.
-### :warning: 3.2.9 - To be deprecated due to internal issue. Do not use.
- -  Added functionality for factory reset time detection.
- -  Added app wise affinity score of user installed apps.
-### :warning: 3.2.8 - To be deprecated due to internal issue. Do not use.
- - Minor bug fixes and improvements.
-### :warning: 3.2.7 - To be deprecated due to internal issue. Do not use.
- - Bug fixes and improvements.
-### :warning: 3.2.6 - To be deprecated due to internal issue. Do not use.
- - Add new fields in the IntelligenceResponse object DeviceMeta & AppAnalytics.
 ### 3.2.5
  - Bug fixes and improvements.
 ### 3.2.4
