@@ -400,8 +400,22 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
         "brand": "iQOO",
         "totalRAM": "7679795200"
     },
-    "additionalData": {},
-    "factoryResetTime": 1743419662000
+    "factoryResetTime": 1743419662000,
+    "genuineInstall": false,
+    "developerOptionsEnabled": true,
+    "usbDebugging": true,
+    "wirelessDebugging": false,
+    "unsecuredWifi": false,
+    "harmfulAppDetected": false,
+    "blacklistedDevice": false,
+    "keyloggerDetected": false,
+    "ruleAction": {
+        "action": "WARN",
+        "name": "VPN enabled",
+        "description": "A VPN connection was detected on this device.",
+        "message": "For security reasons, please disable your VPN and try again."
+    },
+    "additionalData": {}
 }
 ```
 ### Error Response
@@ -445,7 +459,15 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 | deviceMeta                | object             | Contains all device-related information such as brand, model, screen resolution, total storage, etc.                                                                                                                                                                                                                                                                                       | {}                        |
 | additionalData            | object             | Reserved for any extra or custom data not present in the IntelligenceResponse, providing a customized response based on specific requirements.                                                                                                                                                                                     | {} |
 | appliedRules            | object             | Returns the list of applied rules alongside the decision output, enabling the app to take immediate action (e.g., allow, warn, block) based on the exact rules fired.                                                                                                                                                                                     | {} |
-
+| genuineInstall          | boolean | Indicates whether the application is installed from a trusted and official source.                                                                 | false |
+| developerOptionsEnabled | boolean | Indicates whether Developer Options are enabled on the device.                                                                                     | false |
+| usbDebugging            | boolean | Indicates whether USB debugging is currently enabled on the device.                                                                                | false |
+| wirelessDebugging       | boolean | Indicates whether wireless (ADB over Wi-Fi) debugging is enabled on the device.                                                                   | false |
+| unsecuredWifi           | boolean | Indicates whether the device is connected to an unsecured or potentially risky Wi-Fi network.                                                    | false |
+| harmfulAppDetected      | boolean | Indicates whether potentially harmful or risky applications are detected on the device.                                                           | false |
+| blacklistedDevice       | boolean | Indicates whether the device is identified as blacklisted based on internal risk evaluation.                                                      | false |
+| keyloggerDetected       | boolean | Indicates whether potential keylogging behavior or related risks are detected on the device.                                                     | false |
+| ruleAction            | object             | Returns the triggered rule details along with the recommended action (e.g., allow, warn, block), enabling the app to take immediate action based on the specific rule that was fired.                                                                                                                                                                                   | {} |
 <br>
 
 ## Changelog
@@ -454,6 +476,11 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  - Use passive analysis of keystrokes, touches, swipes, sensors, and pointer movements to proactively prevent modern fraud.
  - ANR issues have been identified and fixed.
  - Other minor bugs resolved and overall performance improvements.
+### 4.0.8
+ - Enhanced network risk detection capabilities to better identify insecure environments.
+ - Added additional security signals to strengthen device risk assessment.
+ - Improved cloned application detection logic for greater accuracy.
+ - Updated the Intelligence Response contract to support the latest enhancements.
 ### 4.0.7
  - The SDK now returns the list of applied rules alongside the decision output, enabling the app to take immediate action (e.g., allow, warn, block) based on the exact rules fired.
  - Added eSim detection: SDK now provides eSim detection at a particular sim slot directly in its response.
