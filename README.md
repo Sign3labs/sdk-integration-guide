@@ -480,7 +480,7 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  - Enhanced network risk detection capabilities to better identify insecure environments.
  - Added additional security signals to strengthen device risk assessment.
  - Improved cloned application detection logic for greater accuracy.
- - Updated the Intelligence Response contract to support the latest enhancements.
+ - Updated the Intelligence Response contract to support the latest enhancements, including genuineInstall, developerOptionsEnabled, usbDebugging, wirelessDebugging, harmfulAppDetected, ruleAction, unsecuredWifi, blacklistedDevice, and keyloggerDetected.
 ### 4.0.7
  - The SDK now returns the list of applied rules alongside the decision output, enabling the app to take immediate action (e.g., allow, warn, block) based on the exact rules fired.
  - Added eSim detection: SDK now provides eSim detection at a particular sim slot directly in its response.
