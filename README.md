@@ -476,6 +476,8 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  - Use passive analysis of keystrokes, touches, swipes, sensors, and pointer movements to proactively prevent modern fraud.
  - ANR issues have been identified and fixed.
  - Other minor bugs resolved and overall performance improvements.
+### 4.0.9
+ - Fixed minor background crash occuring on few Android 16 Samsung devices.   
 ### 4.0.8
  - Enhanced network risk detection capabilities to better identify insecure environments.
  - Added additional security signals to strengthen device risk assessment.
