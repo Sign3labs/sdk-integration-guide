@@ -452,7 +452,6 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 | gpsLocation               | object             | Details of the device's current GPS location, including latitude, longitude, and address information.                                                                                                                                                                                                                                                                                     | {}                        |
 | ip                        | string             | The current IP address of the device.                                                                                                                                                                                                                                                                                                                                                     | ""          |
 | ipDetails                 | object             | Object added to capture IP-related information and fraudScore related to IP address.                                                                                                                                                                                                                                                                                                       | {}                        |
-| sign3UserIds              | array of strings   | This will contain Sign3 generated userIds list till now the device has seen. Note: The logic for generating userId will be configured as per your business logic and can be customized.                                                                                                                                                                                               | []                        |
 | simInfo                   | object             | It will contain information like total sims used in a phone in its lifecycle, current sim+slot details.                                                                                                                                                                                                                                                                                    | {}                        |
 | remoteAppProvidersCount   | number             | The number of remote application providers detected on the device.                                                                                                                                                                                                                                                                                                                        | 0                         |
 | deviceRiskScore           | float     | The risk score of the device. Note: sessionRiskScore is derived from the latest state of the device but deviceRiskScore also factors in the historical state of the device (whether a device was rooted in any of the past sessions).                                                                                                                                                     | 0.0                       |
@@ -476,6 +475,20 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  - Use passive analysis of keystrokes, touches, swipes, sensors, and pointer movements to proactively prevent modern fraud.
  - ANR issues have been identified and fixed.
  - Other minor bugs resolved and overall performance improvements.
+### 4.1.0
+ - Improved SDK security by moving SHA-256 and legacy IVs from plaintext resources into native libintelligence.so with runtime assembly and secure fallback handling.
+ - Updated encryption/decryption flow to use SHA-256 with new config and IV support.
+ - Refactored SDK error handling by replacing multiple try/catch blocks with runCatching.
+ - Optimized location handling with shared LocationCache support for GPS and mock-location detectors.
+ - Added TTL-based config refresh and improved ConfigManager.init() flow to prevent redundant API calls and duplicate initialization.
+ - Improved mock-location detection.
+ - Added support for fetching MAC address lists.
+ - Improved Play Integrity and app integrity request handling with new request/session fields and session ID updates.
+ - Removed unused location permissions (ACCESS_COARSE_LOCATION and ACCESS_FINE_LOCATION) from the SDK manifest.
+ - Updated coroutine usage and dispatcher handling for better background task management.
+ - Declared ACCESS_BACKGROUND_LOCATION permission in the demo application.
+### 4.0.9
+ - Fixed minor background crash occuring on few Android 16 Samsung devices.
 ### 4.0.8
  - Enhanced network risk detection capabilities to better identify insecure environments.
  - Added additional security signals to strengthen device risk assessment.
