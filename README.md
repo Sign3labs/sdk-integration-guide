@@ -476,7 +476,7 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  - ANR issues have been identified and fixed.
  - Other minor bugs resolved and overall performance improvements.
 ### 4.1.0
- - - Reduced SDK load during signal collection and optimized overall response time.
+- Reduced SDK load during signal collection and optimized overall response time.
 - Added RASP-based geo spoofing detection.
 - Extended root detection capabilities and improved fingerprinting on rooted devices.
 - Added support for location detection in background scenarios.
