@@ -52,10 +52,12 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 
 ```permission
 <uses-permission android:name="android.permission.INTERNET" />
-<!-- optional -->
+
+<!-- Optional: Add any of the below location permission to get the location data from sdk --> 
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<!-- Below mentioned optional permissions are taken to calculate sim affinity to the device  -->
+
+<!-- Optional: This permission is taken to calculate sim affinity to the device  -->
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 ```
 
