@@ -52,10 +52,12 @@ The Sign3 SDK is an Android-based fraud prevention toolkit designed to assess de
 
 ```permission
 <uses-permission android:name="android.permission.INTERNET" />
-<!-- optional -->
+
+<!-- Optional: Add any of the below location permission to get the location data from sdk --> 
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<!-- Below mentioned optional permissions are taken to calculate sim affinity to the device  -->
+
+<!-- Optional: This permission is taken to calculate sim affinity to the device  -->
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 ```
 
@@ -452,7 +454,6 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 | gpsLocation               | object             | Details of the device's current GPS location, including latitude, longitude, and address information.                                                                                                                                                                                                                                                                                     | {}                        |
 | ip                        | string             | The current IP address of the device.                                                                                                                                                                                                                                                                                                                                                     | ""          |
 | ipDetails                 | object             | Object added to capture IP-related information and fraudScore related to IP address.                                                                                                                                                                                                                                                                                                       | {}                        |
-| sign3UserIds              | array of strings   | This will contain Sign3 generated userIds list till now the device has seen. Note: The logic for generating userId will be configured as per your business logic and can be customized.                                                                                                                                                                                               | []                        |
 | simInfo                   | object             | It will contain information like total sims used in a phone in its lifecycle, current sim+slot details.                                                                                                                                                                                                                                                                                    | {}                        |
 | remoteAppProvidersCount   | number             | The number of remote application providers detected on the device.                                                                                                                                                                                                                                                                                                                        | 0                         |
 | deviceRiskScore           | float     | The risk score of the device. Note: sessionRiskScore is derived from the latest state of the device but deviceRiskScore also factors in the historical state of the device (whether a device was rooted in any of the past sessions).                                                                                                                                                     | 0.0                       |
@@ -476,6 +477,14 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  - Use passive analysis of keystrokes, touches, swipes, sensors, and pointer movements to proactively prevent modern fraud.
  - ANR issues have been identified and fixed.
  - Other minor bugs resolved and overall performance improvements.
+### 4.1.0
+- Reduced SDK load during signal collection and optimized overall response time.
+- Added RASP-based geo spoofing detection.
+- Extended root detection capabilities and improved fingerprinting on rooted devices.
+- Added support for location detection in background scenarios.
+- Fixed a minor crash issue observed on Android 16 Samsung devices.
+### 4.0.9
+ - Fixed minor background crash occuring on few Android 16 Samsung devices.
 ### 4.0.8
  - Enhanced network risk detection capabilities to better identify insecure environments.
  - Added additional security signals to strengthen device risk assessment.
