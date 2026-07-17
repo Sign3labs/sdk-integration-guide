@@ -477,6 +477,8 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  - Use passive analysis of keystrokes, touches, swipes, sensors, and pointer movements to proactively prevent modern fraud.
  - ANR issues have been identified and fixed.
  - Other minor bugs resolved and overall performance improvements.
+### 4.1.1
+- Minor stability fixes and improvements.
 ### 4.1.0
 - Reduced SDK load during signal collection and optimized overall response time.
 - Added RASP-based geo spoofing detection.
