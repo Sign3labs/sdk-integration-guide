@@ -256,7 +256,7 @@ Sign3Intelligence.getInstance(this).stopAnalyzingBehaviour()
 - You can also set multiple contexts between startAnalyzingBehaviour() and stopAnalyzingBehaviour() and The context is not carried over to the next capture — call setContext() again for every capture you want labelled.
 
 ```context
-Sign3Intelligence.getInstance(this).setContext("add_card")
+Sign3Intelligence.getInstance(this).setCaptureContext("add_card")
 ```
 
 
