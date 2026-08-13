@@ -260,12 +260,12 @@ Sign3Intelligence.getInstance(this).setCaptureContext("login")
 ```
 
 ```context
-Sign3Intelligence.getInstance(this).setCaptureContext(
-      mapOf(
-          "card_type" to "credit",
-          "entry_mode" to "manual",
-          "attempt_number" to "2"
-      )
+ Sign3Intelligence.getInstance(this).setCaptureContext("add_card",
+            mapOf(
+                "card_type" to "credit",
+                "entry_mode" to "manual",
+                "attempt_number" to "2"
+            )
 )
 ```
 
