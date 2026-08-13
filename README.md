@@ -247,13 +247,13 @@ String captureId = Sign3Intelligence.getInstance(this).startAnalyzingBehaviour()
 Sign3Intelligence.getInstance(this).stopAnalyzingBehaviour()
 ```
 
-### Set Context
+### Set Capture Context
 
 - Use this method to label a behavioural capture with a name and, optionally, your own custom attributes, so the session can be identified in insights and reports.
-- The context accepts two types of fields:
+- The capture context accepts two types of fields:
     - name — a short label for the flow or screen being captured (e.g. login, add_card, payment). This field is required.
     - attributes — an optional Map<String, String> of your own key–value pairs carrying extra detail about the capture- Call it before startAnalyzingBehaviour() to label the capture from the very beginning.
-- You can also set multiple contexts between startAnalyzingBehaviour() and stopAnalyzingBehaviour() and The context is not carried over to the next capture — call setContext() again for every capture you want labelled.
+- You can also set multiple contexts between startAnalyzingBehaviour() and stopAnalyzingBehaviour() and The capture context is not carried over to the next capture — call setCaptureContext() again for every capture you want labelled.
 
 ```context
 Sign3Intelligence.getInstance(this).setCaptureContext("add_card")
@@ -486,7 +486,7 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 
 ## Changelog
 ### 5.1.1
- - Added `setContext()` to label a behavioural capture with a name and optional custom attributes.
+ - Added `setCaptureContext()` to label a behavioural capture with a name and optional custom attributes.
 ### 5.1.0
  - Expanded behavioural signal coverage and improved signal accuracy for stronger fraud detection.
  - Behavioural capture now stops automatically after a period of user inactivity.
