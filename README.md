@@ -224,16 +224,15 @@ The Behavioural biometrics feature in the SDK captures and analyzes how users in
 - Use this method to start capturing the user’s behavioral data.
 - Call it at the point in your app where you want to track interactions, such as on a specific screen or during flows like login, signup, or payment.
 - The function returns a capture ID for detailed insights tracking.
-- If `startAnalyzingBehaviour()` is called multiple times without calling `stopAnalyzingBehaviour()`, the same capture ID will be returned.
 
 ### For Kotlin
 ```start
-val captureId = Sign3Intelligence.getInstance(this).startAnalyzingBehaviour()
+Sign3Intelligence.getInstance(this).startAnalyzingBehaviour()
 ```
 
 ### For Java
  ```java
-String captureId = Sign3Intelligence.getInstance(this).startAnalyzingBehaviour()
+Sign3Intelligence.getInstance(this).startAnalyzingBehaviour()
 ```
 
 ### StopAnalyzingBehaviour
