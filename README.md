@@ -81,7 +81,7 @@ override fun onCreate() {
             .setClientId("<SIGN3_CLIENT_ID>")
             .setClientSecret("<SIGN3_CLIENT_SECRET>")
             .setSSLPinning(true) // Optional: If you want SSL pinning in API calls, default value is false.
-            .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
+            .setEnvironment(if (BuildConfig.DEBUG) Options.ENV_DEV else Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
             .build()
 
         Sign3Intelligence.getInstance(this).initAsync(options) {
@@ -105,7 +105,7 @@ public void onCreate() {
             .setClientId("<SIGN3_CLIENT_ID>")
             .setClientSecret("<SIGN3_CLIENT_SECRET>")
             .setSSLPinning(true) // Optional: If you want SSL pinning in API calls, default value is false.
-            .setEnvironment(Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
+            .setEnvironment(BuildConfig.DEBUG ? Options.ENV_DEV : Options.ENV_PROD) // For Prod: Options.ENV_PROD, For Dev: Options.ENV_DEV
             .build();
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -333,47 +333,20 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
     "factoryReset": true,
     "appTampering": true,
     "sessionRiskScore": 99.50516,
-    "deviceRiskScore": 99.50516,
+    "deviceRiskScore": 83.15098,
     "clientUserIds": [
         "difansd23r32",
         "2390ksdfaksd"
     ],
-     "appliedRules": {
-        "rules": {
-            "102 : Screen mirrored": 0,
-            "105 : Unusual Behaviour": "",
-            "109 : Transaction into black listed account": "",
-            "110 : Blacklist phone number": "",
-            "55 : VPN enabled": 0,
-            "58 : Remote access apps installed": "",
-            "6 : Professional profiles exists": 0,
-            "62 : account takeover high risk": 0,
-            "65 : multi carding high risk": 0,
-            "67 : account takeover medium risk": 0,
-            "68 : multi carding medium risk": 0,
-            "75 : social media account count more than 5": 0,
-            "77 : Users velocity": 0,
-            "91 : Money mule pincode": 0,
-            "92 : Blacklisted ip": 0,
-            "93 : More than 4 profiles associated with the device": 0,
-            "94 : Device identifiers changed": 0,
-            "95 : History of factory reset": 0,
-            "96 : More than 80 sims used": 0,
-            "97 : Phone number is not vintage": 0,
-            "98 : Email is not vintage": 0,
-            "99 : App is tampered": 50
-        },
-        "totalScore": 50.0
-    },
     "gpsLocation": {
         "address": "F2620, Block F, Sushant Lok III, Sector 57, Gurugram, Haryana 122011, India",
         "adminArea": "Haryana",
         "countryCode": "IN",
         "countryName": "India",
         "featureName": "F2620",
-        "latitude": "28.420385999999997",
+        "latitude": "28.42038",
         "locality": "Gurugram",
-        "longitude": "77.088926",
+        "longitude": "77.08892",
         "postalCode": "122011",
         "subAdminArea": "Gurgaon Division",
         "subLocality": "Sector 57"
@@ -383,10 +356,10 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
         "fraudScore": 27.0,
         "city": "New Delhi",
         "isp": null,
-        "latitude": 28.60000038,
+        "latitude": 28.60000,
         "region": "National Capital Territory of Delhi",
         "asn": "",
-        "longitude": 77.19999695
+        "longitude": 77.19999₹
     },
     "simInfo": {
          "simIds": [
@@ -481,7 +454,6 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 | deviceRiskScore           | float     | The risk score of the device. Note: sessionRiskScore is derived from the latest state of the device but deviceRiskScore also factors in the historical state of the device (whether a device was rooted in any of the past sessions).                                                                                                                                                     | 0.0                       |
 | deviceMeta                | object             | Contains all device-related information such as brand, model, screen resolution, total storage, etc.                                                                                                                                                                                                                                                                                       | {}                        |
 | additionalData            | object             | Reserved for any extra or custom data not present in the IntelligenceResponse, providing a customized response based on specific requirements.                                                                                                                                                                                     | {} |
-| appliedRules            | object             | Returns the list of applied rules alongside the decision output, enabling the app to take immediate action (e.g., allow, warn, block) based on the exact rules fired.                                                                                                                                                                                     | {} |
 | genuineInstall          | boolean | Indicates whether the application is installed from a trusted and official source.                                                                 | false |
 | developerOptionsEnabled | boolean | Indicates whether Developer Options are enabled on the device.                                                                                     | false |
 | usbDebugging            | boolean | Indicates whether USB debugging is currently enabled on the device.                                                                                | false |
