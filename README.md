@@ -496,7 +496,7 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 
 ## Changelog
 ### 5.1.1
- - Added `setCaptureContext()` to label a behavioural capture with a name and optional custom attributes.
+ - Minor improvements and ease in integration flow.
 ### 5.1.0
  - Expanded behavioural signal coverage and improved signal accuracy for stronger fraud detection.
  - Behavioural capture now stops automatically after a period of user inactivity.
@@ -504,6 +504,7 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
  - Security hardening of the SDK's internal data.
  - Memory leaks fixed and crashes resolved on certain devices.
  - Other minor bugs resolved and overall performance improvements.
+ - Added `setCaptureContext()` to label a behavioural capture with a name and optional custom attributes.
 ### 5.0.0
  - Analyze every user interaction for potential fraud using behavioral biometrics.
  - Use passive analysis of keystrokes, touches, swipes, sensors, and pointer movements to proactively prevent modern fraud.
