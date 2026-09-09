@@ -466,6 +466,9 @@ Sign3Intelligence.getInstance(this).getIntelligence(new IntelligenceListener() {
 <br>
 
 ## Changelog
+### 5.2.0
+ - Improvements in signals enrichment and attack prevention.
+ - Added new signals and extended capabilities around the signals.
 ### 5.1.1
  - Minor improvements and ease in integration flow.
 ### 5.1.0
