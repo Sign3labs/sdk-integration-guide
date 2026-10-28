@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name">Sign3 Intelligence</string>
+
+    <!-- Screen titles -->
+    <string name="title_get_intelligence">Device Intelligence</string>
+    <string name="title_update_options">Update Options</string>
+    <string name="title_behavioural">Behavioural Biometrics</string>
+    <string name="title_screen_capture">Screen Capture Protection</string>
+
+    <!-- Menu -->
+    <string name="menu_update_options">Update Options</string>
+    <string name="menu_behavioural">Behavioural Biometrics</string>
+    <string name="menu_screen_capture">Screen Capture Protection</string>
+    <string name="menu_session_id">Session ID</string>
+
+    <!-- SDK state -->
+    <string name="sdk_initialising">Sign3 SDK is still initialising, try again in a moment.</string>
+    <string name="sdk_missing_credentials">Sign3 credentials missing. Add SIGN3_CLIENT_ID and SIGN3_CLIENT_SECRET to credentials.properties and rebuild.</string>
+    <string name="sdk_init_failed">Sign3 SDK failed to initialise. Check the client ID, secret and network, then restart the app.</string>
+
+    <!-- Session ID dialog -->
+    <string name="session_id_dialog_title">Session ID</string>
+    <string name="session_id_empty">No session ID available. Is the SDK initialised?</string>
+    <string name="copy">Copy</string>
+    <string name="close">Close</string>
+    <string name="copied">Session ID copied</string>
+
+    <!-- Get Intelligence -->
+    <string name="get_intelligence_intro">Fetch the Sign3 device intelligence result for this session. Use the menu (⋮) to update options, run behavioural biometrics, protect the screen, or view the session ID.</string>
+    <string name="fetch_intelligence">Fetch intelligence</string>
+    <string name="response_placeholder">No result yet. Tap “Fetch intelligence” to call getIntelligence().</string>
+    <string name="label_session_risk">Session risk</string>
+    <string name="label_device_risk">Device risk</string>
+    <string name="label_signals">Signals</string>
+    <string name="label_full_response">Full response</string>
+    <string name="rule_action_format">Rule action: %1$s</string>
+
+    <!-- Update Options -->
+    <string name="update_options_intro">Build an UpdateOptions object and apply it with updateOptions(). Options are consumed by the next getIntelligence() call, so fetch right after updating.</string>
+    <string name="hint_user_id">User ID</string>
+    <string name="hint_phone">Phone number</string>
+    <string name="hint_merchant_id">Merchant ID</string>
+    <string name="label_phone_input_type">Phone input type</string>
+    <string name="label_otp_input_type">OTP input type</string>
+    <string name="label_user_event_type">User event type</string>
+    <string name="label_attributes">Additional attributes</string>
+    <string name="helper_attributes">One KEY=VALUE per line</string>
+    <string name="update_options">Update options</string>
+    <string name="update_and_fetch">Update &amp; fetch intelligence</string>
+    <string name="options_updated">UpdateOptions applied:\n%1$s</string>
+    <string name="fetching">Fetching intelligence…</string>
+
+    <!-- Behavioural -->
+    <string name="behavioural_intro">Label the capture with setCaptureContext(), start collecting with startAnalyzingBehaviour(), interact with the playground, then stopAnalyzingBehaviour().</string>
+    <string name="section_capture_context">Capture context</string>
+    <string name="section_capture">Capture</string>
+    <string name="hint_context_name">Context name (e.g. login)</string>
+    <string name="label_context_attributes">Context attributes (optional)</string>
+    <string name="set_capture_context">Set capture context</string>
+    <string name="start_capture">Start</string>
+    <string name="stop_capture">Stop</string>
+    <string name="capture_status_idle">Not capturing</string>
+    <string name="capture_status_running">Capturing · captureId: %1$s</string>
+    <string name="capture_context_set_none">setCaptureContext() → context cleared</string>
+    <string name="capture_context_set_name">setCaptureContext(\"%1$s\")</string>
+    <string name="capture_context_set_full">setCaptureContext(\"%1$s\", %2$d attribute(s))</string>
+    <string name="capture_stopped">stopAnalyzingBehaviour()</string>
+    <string name="playground_title">Interaction playground</string>
+    <string name="playground_intro">Type, tap, toggle and slide here while a capture is running.</string>
+    <string name="hint_playground_text">Type something</string>
+    <string name="hint_playground_number">Enter a number</string>
+    <string name="playground_button">Tap me</string>
+    <string name="playground_toggle">Toggle me</string>
+
+    <!-- Screen capture -->
+    <string name="section_activity_protection">Activity protection</string>
+    <string name="section_dialog_protection">Dialog protection</string>
+    <string name="screen_capture_intro">protectScreenCapture(activity) blocks screenshots and screen recording for this screen. stopScreenCaptureProtection(activity) removes the block.</string>
+    <string name="protect_activity">Protect this screen</string>
+    <string name="unprotect_activity">Stop protecting</string>
+    <string name="show_protected_dialog">Show protected dialog</string>
+    <string name="protection_status_on">Protection ON — try taking a screenshot</string>
+    <string name="protection_status_off">Protection OFF</string>
+    <string name="protected_dialog_title">Protected dialog</string>
+    <string name="protected_dialog_message">This dialog is protected with protectScreenCapture(dialog) and released with stopScreenCaptureProtection(dialog) when dismissed.</string>
+</resources>
