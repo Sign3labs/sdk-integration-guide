@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Sign3 Intelligence</string>
+
+    <string name="intro">Each button calls one Sign3Intelligence API through Sign3Manager. Output is logged below and to Logcat (tag Sign3Manager).</string>
+
+    <string name="fetch_intelligence">Get intelligence</string>
+    <string name="session_id">Get session ID</string>
+
+    <string name="hint_user_id">User ID (optional)</string>
+    <string name="hint_phone">Phone number (optional)</string>
+    <string name="update_options">Update options</string>
+
+    <string name="hint_capture_context">Capture context, e.g. login (blank clears)</string>
+    <string name="set_capture_context">Set capture context</string>
+    <string name="start_capture">Start behaviour capture</string>
+    <string name="stop_capture">Stop behaviour capture</string>
+
+    <string name="protect_screen">Protect screen</string>
+    <string name="unprotect_screen">Unprotect screen</string>
+    <string name="protected_dialog">Show protected dialog</string>
+    <string name="protected_dialog_title">Protected dialog</string>
+    <string name="protected_dialog_message">This dialog is protected with protectScreenCapture(dialog) and released with stopScreenCaptureProtection(dialog) on dismiss.</string>
+    <string name="close">Close</string>
+</resources>
