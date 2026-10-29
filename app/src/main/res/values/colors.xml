@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="sign3_primary">#1E40AF</color>
-    <color name="sign3_on_primary">#FFFFFF</color>
-    <color name="sign3_primary_container">#DBE4FF</color>
-    <color name="sign3_on_primary_container">#0B1F5C</color>
-    <color name="sign3_secondary">#0F766E</color>
-    <color name="sign3_surface">#F7F8FC</color>
-    <color name="sign3_surface_container">#FFFFFF</color>
-    <color name="sign3_on_surface">#1A1C23</color>
-    <color name="sign3_on_surface_variant">#5B6072</color>
-    <color name="sign3_outline">#C5C9D6</color>
-    <color name="signal_safe">#16A34A</color>
-    <color name="signal_risk">#DC2626</color>
-    <color name="signal_unknown">#9CA3AF</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
